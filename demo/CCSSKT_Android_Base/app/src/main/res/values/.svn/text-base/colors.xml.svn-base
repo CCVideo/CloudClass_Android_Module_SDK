@@ -34,4 +34,5 @@
     <color name="colorItemPressed">#DDDDDD</color>
     <color name="colorItemTip">#333333</color>
     <color name="colorItemValue">#666666</color>
+    <color name="pickerview_topbar_title">#000000</color>
 </resources>

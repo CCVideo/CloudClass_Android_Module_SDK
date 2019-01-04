@@ -7,13 +7,19 @@ import android.graphics.Bitmap;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bokecc.ccdocview.CCDocViewManager;
@@ -22,6 +28,7 @@ import com.bokecc.sskt.base.CCAtlasClient;
 import com.bokecc.sskt.base.CCInteractSDK;
 import com.bokecc.sskt.base.CCStream;
 import com.bokecc.sskt.base.LocalStreamConfig;
+import com.bokecc.sskt.base.MyBroadcastReceiver;
 import com.bokecc.sskt.base.SubscribeRemoteStream;
 import com.bokecc.sskt.base.bean.CCInteractBean;
 import com.bokecc.sskt.base.bean.CCUser;
@@ -29,6 +36,7 @@ import com.bokecc.sskt.base.bean.CCUserRoomStatus;
 import com.bokecc.sskt.base.bean.ChatMsg;
 import com.bokecc.sskt.base.exception.StreamException;
 import com.bokecc.sskt.base.renderer.CCSurfaceRenderer;
+import com.bokecc.sskt.base.view.CCMediaSurfaceView;
 import com.example.ccbarleylibrary.CCBarLeyManager;
 import com.example.ccbarleylibrary.CCBarLeyCallBack;
 import com.example.ccchatlibrary.CCChatManager;
@@ -44,6 +52,7 @@ import java.util.logging.Handler;
 import butterknife.BindView;
 import butterknife.OnClick;
 import ccsskt.bokecc.base.example.base.BaseActivity;
+import ccsskt.bokecc.base.example.util.DensityUtil;
 
 /**
  * 作者 ${CC视频}.<br/>
@@ -103,6 +112,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @BindView(R.id.id_pic)
     ImageView mPic;
 
+    @BindView(R.id.id_class_madie_video_container)
+    FrameLayout mMadieVideoContainer;
+    @BindView(R.id.id_media_surface)
+    CCMediaSurfaceView idCCMediaSurface;
+
     private CCSurfaceRenderer mLocalRenderer, mRemoteMixRenderer;
     private CCStream mLocalStream, mStream;
 
@@ -160,7 +174,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     private String rtmp;
     private DrawHandler mDrawHandler;
-
+    int vWidth = 0;
+    int vHeight = 0;
+    private int mMadieScreenLeft = 0, mMadieScreenTop = 0;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -199,42 +215,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         final String sessionid = getIntent().getStringExtra(KEY_SESSION_ID);
         final String userAccount = getIntent().getStringExtra(KEY_USER_ACCOUNT);
         rtmp = "rtmp://push-cc1.csslcloud.net/origin/" + getIntent().getStringExtra(KEY_ROOM_ID);
-        showProgress();
-
-        ccAtlasClient.dispatch(getIntent().getStringExtra(KEY_ROOM_ID),getIntent().getStringExtra(KEY_USER_ACCOUNT),null);
-        ccAtlasClient.changeServerDomain(null, "HB", getIntent().getStringExtra(KEY_ROOM_ID),
-                userAccount, new CCAtlasCallBack<Void>() {
-                    @Override
-                    public void onSuccess(Void s) {
-                        ccAtlasClient.join(sessionid, userAccount, null, new CCAtlasCallBack<CCInteractBean>() {
-                            @Override
-                            public void onSuccess(CCInteractBean ccBaseBean) {
-                                dismissProgress();
-                                showToast("join room success");
-                                createLocalStream();
-                                if (ccAtlasClient.getUserList() != null) {
-                                    for (CCUser user :
-                                            ccAtlasClient.getUserList()) {
-                                        if (user.getLianmaiStatus() == ccAtlasClient.LIANMAI_STATUS_IN_MAI) {
-                                            Log.i(TAG, "wdh------>onSuccess: " + user.getUserName());
-                                        }
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int errCode, String errMsg) {
-                                dismissProgress();
-                                showToast(errMsg);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onFailure(int errCode, String errMsg) {
-
-                    }
-                });
+//        doMadieScreenLayoutTouch();
+//        ccAtlasClient.dispatch(getIntent().getStringExtra(KEY_USER_ACCOUNT), null);
+        createLocalStream();
+        initMedia();
 
         //用户自己定义的socket事件
         ccAtlasClient.setOnPublishMessageListener(mPublishMessage);
@@ -242,13 +226,142 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         ccAtlasClient.setOnUserRoomStatus(mUpdateUserList);
         //人员在举手连麦模式下，举手通知事件
         ccAtlasClient.setOnUserHand(mUserHand);
+//        Toast.makeText(this,  "您被老师授权标注", Toast.LENGTH_SHORT).show();
+
+        idCCMediaSurface.setOnVideoWHListener(new CCMediaSurfaceView.OnVideoWHListener() {
+            @Override
+            public void setVideoWH(int w, int h) {
+                vWidth = w;
+                vHeight = h;
+                changeVideo(mMadieVideoContainer, DensityUtil.dp2px(MainActivity.this, 160),
+                        idCCMediaSurface);
+            }
+        });
+
+        idCCMediaSurface.setOnIsVisiableMadieListener(new CCMediaSurfaceView.OnIsVisiableMadieListener() {
+            @Override
+            public void isShowMadie(final boolean isShow) {
+
+                showView(mMadieVideoContainer, isShow);
+            }
+        });
+
+
+    }
+
+    private void initMedia(){
+        String url = ccAtlasClient.getString(CCAtlasClient.MEDIA_URL);
+        //开启直播的时候判断是否有插播音视频
+        if (!TextUtils.isEmpty(url)) {
+            mMadieVideoContainer.setVisibility(View.VISIBLE);
+        } else {
+            mMadieVideoContainer.setVisibility(View.GONE);
+        }
+        //是不是要隐藏播放视频
+        showView(mMadieVideoContainer, idCCMediaSurface.getVideoType());
+    }
+
+    private void showView(final View view, final boolean isShow) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (isShow) {
+                    mMadieVideoContainer.setVisibility(View.VISIBLE);
+                } else {
+                    mMadieVideoContainer.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    private void changeVideo(FrameLayout relativeLayout, int width, View surfaceView) {
+        // 该LinearLayout的父容器 android:orientation="vertical" 必须
+        FrameLayout linearLayout = (FrameLayout) relativeLayout;
+        int lw = width;
+        int lh = linearLayout.getHeight();
+        float max = 1;
+
+        // 如果video的宽或者高超出了当前屏幕的大小，则要进行缩放
+//        if (getResources().getConfiguration().orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+//            //竖屏模式下按视频宽度计算放大倍数值
+//            max = (float) vWidth / (float) lw;
+//        }
+        if(vWidth<vHeight){
+            max = (float) vHeight / (float) lw;
+        }else {
+            max = (float) vWidth / (float) lw;
+        }
+        // 选择大的一个进行缩放
+
+        int vWidthTemp = (int) Math.ceil((float) vWidth / max);
+        int vHeightTemp = (int) Math.ceil((float) vHeight / max);
+
+        // 设置surfaceView的布局参数
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(vWidthTemp, vHeightTemp);
+        lp.gravity = (Gravity.CENTER);
+        surfaceView.setLayoutParams(lp);
+    }
+
+    private void doMadieScreenLayoutTouch() {
+        final RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mMadieVideoContainer.getLayoutParams();
+        final GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                mMadieScreenLeft = params.leftMargin;
+                mMadieScreenTop = params.topMargin;
+                RelativeLayout.LayoutParams temp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+                temp.leftMargin = 0;
+                temp.topMargin = 0;
+                mMadieVideoContainer.setLayoutParams(temp);
+//                FrameLayout.LayoutParams videoParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                videoParams.gravity = Gravity.CENTER;
+//                idCCMediaSurface.setLayoutParams(videoParams);
+
+                changeVideo(mMadieVideoContainer, DensityUtil.getWidth(MainActivity.this), idCCMediaSurface);
+
+                return super.onDoubleTap(e);
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                //计算移动的距离
+                int offX = (int) (e2.getX() - e1.getX());
+                int offY = (int) (e2.getY() - e1.getY());
+                params.topMargin = params.topMargin + offY;
+                params.leftMargin = params.leftMargin + offX;
+                if (params.topMargin < 0) {
+                    params.topMargin = 0;
+                }
+                if (params.leftMargin < 0) {
+                    params.leftMargin = 0;
+                }
+                if (params.topMargin > (DensityUtil.getHeight(MainActivity.this) - mMadieVideoContainer.getHeight()
+                        - DensityUtil.dp2px(MainActivity.this, 30))) {
+                    params.topMargin = DensityUtil.getHeight(MainActivity.this) - mMadieVideoContainer.getHeight() - DensityUtil.dp2px(MainActivity.this, 30);
+                }
+                if (params.leftMargin > (DensityUtil.getWidth(MainActivity.this) - mMadieVideoContainer.getWidth())) {
+                    params.leftMargin = DensityUtil.getWidth(MainActivity.this) - mMadieVideoContainer.getWidth();
+                }
+                mMadieVideoContainer.setLayoutParams(params);
+                return super.onScroll(e1, e2, distanceX, distanceY);
+            }
+        });
+        mMadieVideoContainer.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                boolean temp = (gestureDetector.onTouchEvent(event));
+                return temp;
+            }
+        });
     }
 
     //人员在举手连麦模式下，举手通知事件
     private CCAtlasClient.OnUserHand mUserHand = new CCAtlasClient.OnUserHand() {
         @Override
         public void UserHand(CCUser user) {
-            message(user.getUserName() + "举手了");
+            pusher(user.getUserName());
         }
     };
 
@@ -323,7 +436,20 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             showToast(e.getMessage());
         }
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (idCCMediaSurface != null) {
+            idCCMediaSurface.seekToVideo();
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (idCCMediaSurface != null) {
+            idCCMediaSurface.pauseVideo();
+        }
+    }
     @Override
     protected void onDestroy() {
         if (mLocalRenderer != null) {
@@ -342,6 +468,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             mLocalStream.detach();
             ccAtlasClient.destoryLocalStream();
         }
+        MyBroadcastReceiver.getInstance().unMyBroadcastReceiver();
         ccAtlasClient = null;
         super.onDestroy();
     }
@@ -353,6 +480,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             @Override
             public void onSuccess(Void aVoid) {
                 dismissProgress();
+                ccAtlasClient.CCReportLogInfo();
                 finish();
             }
 

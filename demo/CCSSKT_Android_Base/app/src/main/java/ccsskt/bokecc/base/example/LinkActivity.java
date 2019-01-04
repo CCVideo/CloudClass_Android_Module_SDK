@@ -60,7 +60,7 @@ public class LinkActivity extends TitleActivity<LinkActivity.LinkViewHolder> {
 
         @OnClick(R.id.id_link_go)
         void go() {
-            String url = "https://class.csslcloud.net/index/talker/?roomid=A7487250A66C260F9C33DC5901307461&userid=83F203DAC2468694";
+            String url = "https://class.csslcloud.net/index/talker/?roomid=309AA109CC2718E09C33DC5901307461&userid=83F203DAC2468694";
             if (TextUtils.isEmpty(url)) {
                 showToast("请输入链接");
                 return;

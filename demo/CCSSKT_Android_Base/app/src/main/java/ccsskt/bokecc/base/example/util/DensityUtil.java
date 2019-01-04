@@ -2,6 +2,7 @@ package ccsskt.bokecc.base.example.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -89,4 +90,20 @@ public final class DensityUtil {
         return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
     }
 
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen","android");
+        return resources.getDimensionPixelSize(resourceId);
+    }
+
+    /**
+     * 获取导航栏高度
+     * @param context
+     * @return
+     */
+    public static int getDaoHangHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height","dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
+    }
 }

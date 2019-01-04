@@ -3,11 +3,15 @@ package ccsskt.bokecc.base.example;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.bokecc.sskt.base.CCAtlasCallBack;
+import com.bokecc.sskt.base.bean.CCInteractBean;
+import com.bokecc.sskt.base.bean.CCUser;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import ccsskt.bokecc.base.example.base.TitleActivity;
@@ -128,10 +132,24 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
             ccAtlasClient.login(mRoomId, mUserAccount, Integer.parseInt(mRole.equals("talker") ? "1" : "0"), nickname,
                     password, new CCAtlasCallBack<String>() {
                         @Override
-                        public void onSuccess(String Seesionid) {
+                        public void onSuccess(final String Seesionid) {
                             try {
                                 dismissProgress();
-                                MainActivity.startSelf(ValidateActivity.this, Seesionid, mRoomId, mUserAccount);
+                                ccAtlasClient.join(Seesionid, mUserAccount, null, new CCAtlasCallBack<CCInteractBean>() {
+                                    @Override
+                                    public void onSuccess(CCInteractBean ccBaseBean) {
+                                        dismissProgress();
+                                        showToast("join room success");
+                                        MainActivity.startSelf(ValidateActivity.this, Seesionid, mRoomId, mUserAccount);
+                                    }
+
+                                    @Override
+                                    public void onFailure(int errCode, String errMsg) {
+                                        dismissProgress();
+                                        showToast(errMsg);
+                                    }
+                                });
+
                             } catch (Exception e) {
                                 showToast(e.getMessage());
                             }

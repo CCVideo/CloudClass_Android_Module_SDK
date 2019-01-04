@@ -7,25 +7,32 @@
     <com.github.rongi.rotate_layout.layout.RotateLayout
         android:id="@+id/id_lecture_doc_rotate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#000000">
 
         <RelativeLayout
             android:id="@+id/id_lecture_doc_area"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#ffffff"
             android:clickable="true">
 
-            <com.bokecc.ccdocview.DocWebView
-                android:id="@+id/id_docppt_display"
+            <RelativeLayout
+                android:id="@+id/parentView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
+                android:layout_height="wrap_content">
 
-            <com.bokecc.ccdocview.DocView
-                android:id="@+id/id_doc_display"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                <com.bokecc.ccdocview.DocWebView
+                    android:id="@+id/id_docppt_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+                <com.bokecc.ccdocview.DocView
+                    android:id="@+id/id_doc_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/id_doc_bottom_layout"
@@ -41,7 +48,8 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_alignParentEnd="true"
-                    android:background="@drawable/fullscreen" />
+                    android:background="@drawable/fullscreen"
+                    android:visibility="visible"/>
 
                 <ImageButton
                     android:id="@+id/id_doc_exit_fullscreen"
@@ -78,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:background="@drawable/teacher_doc_eraser"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <ImageButton
             android:id="@+id/id_lecture_draw_gesture"

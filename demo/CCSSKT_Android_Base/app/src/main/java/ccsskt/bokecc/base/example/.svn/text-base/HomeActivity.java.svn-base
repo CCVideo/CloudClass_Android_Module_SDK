@@ -56,20 +56,23 @@ public class HomeActivity extends BaseActivity {
         HomeActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
-    @NeedsPermission(Manifest.permission.CAMERA)
+    @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest
+            .permission.READ_EXTERNAL_STORAGE})
     void goScan() {
         // NOTE: Perform action that requires the permission. If this is run by PermissionsDispatcher, the permission will have been granted
         go(QrCodeActivity.class);
     }
 
-    @OnShowRationale(Manifest.permission.CAMERA)
+    @OnShowRationale({Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest
+            .permission.READ_EXTERNAL_STORAGE})
     void showRationaleForCamera(PermissionRequest request) {
         // NOTE: Show a rationale to explain why the permission is needed, e.g. with a dialog.
         // Call proceed() or cancel() on the provided PermissionRequest to continue or abort
         showRationaleDialog(request);
     }
 
-    @OnNeverAskAgain(Manifest.permission.CAMERA)
+    @OnNeverAskAgain({Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest
+            .permission.READ_EXTERNAL_STORAGE})
     void onCameraNeverAskAgain() {
         Toast.makeText(this, "相机权限被拒绝，并且不会再次询问", Toast.LENGTH_SHORT).show();
     }

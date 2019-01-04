@@ -160,4 +160,20 @@
 
     </ScrollView>
 
+    <!--插播音视频-->
+    <FrameLayout
+        android:id="@+id/id_class_madie_video_container"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:background="@color/pickerview_topbar_title"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <com.bokecc.sskt.base.view.CCMediaSurfaceView
+            android:id="@+id/id_media_surface"
+            android:layout_width="160dp"
+            android:layout_height="90dp"
+            android:visibility="visible" />
+    </FrameLayout>
+
 </android.support.v4.widget.DrawerLayout>

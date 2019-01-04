@@ -23,6 +23,23 @@ object 参数说明：
 | password  | String | 用户密码   | 必选     |
 | callBack| CCAtlasCallBack | 回调   | 必选     |
 
+## 0.1 获取sessionid
+登入房间需要获取sessionid才可以登入房间
+```javascript
+public void login(String roomId, String userId, @CCAtlasClient.Role int role,
+                      String username, String password,final CCAtlasCallBack<String> callBack) {
+```
+object 参数说明：
+
+| 参数名称 | 参数类型 | 说明               | 是否必须 |
+| -------- | -------- | ------------------ | -------- |
+| roomId  | String | 房间ID   | 必选     |
+| userId| String | 用户ID   | 必选     |
+| role| int | 用户角色   | 必选     |
+| username  | String |  用户名  | 必选     |
+| password  | String | 用户密码   | 必选     |
+| callBack| CCAtlasCallBack | 回调   | 必选     |
+
 ### 0.1.1 登录成功
 
 join登录成功以后，给客户返回配置信息data
@@ -402,14 +419,13 @@ public void setRegion(@NonNull CCStream stream, final CCAtlasCallBack<Void> call
 
 此方法主要是获取到城市节点的列表
 ```javascript
- public void dispatch(String roomid,String userid,final CCAtlasCallBack<CCCityBean> callBack){
+ public void dispatch(String userid,final CCAtlasCallBack<CCCityBean> callBack){
 ```
 参数说明：
 
 | 参数名称 | 参数类型 | 说明                           | 是否必须 |
 | -------- | -------- | ------------------------------ | -------- |
-| roomid   | String    | 房间ID           | 必选     |
-| userid   | String  | 用户ID             | 必选     |
+| userid   | String  | 账户ID             | 必选     |
 | callBack | CCAtlasCallBack  | 回调      | 可选     |
 
 # 2. 公有的SDK接口
@@ -653,3 +669,65 @@ public interface OnMediaListener{
     void onVideo(String userid, boolean isAllowVideo, boolean isSelf);
 }
 ```
+
+## 4、插播音视频（自定义控件CCMediaSurfaceView）
+
+### 4.1使用方法布局文件使用，如下
+
+```
+  <com.bokecc.sskt.base.view.CCMediaSurfaceView
+            android:id="@+id/id_ccmediasurface"
+            android:layout_width="160dp"
+            android:layout_height="90dp"
+            android:visibility="visible" />
+```
+### 4.2自定义控件的回调
+
+### 4.2.1 是不是显示自定义控件
+
+业务需要：视频显示控件、音频隐藏控件，可根据此监听写自己的业务逻辑
+
+```
+public interface OnIsVisiableMadieListener {
+        /**
+         * @param isShow 是否显示插播音视频
+         */
+        void isShowMadie(boolean isShow);
+    }
+```
+
+### 4.2.2 获取真实视频的宽高
+
+业务需要：获取真实视频的宽高，进行做视频，防止视频变形；音频的时候宽高都是0
+
+```
+public interface OnVideoWHListener {
+        void setVideoWH(int w, int h);
+    }
+```
+
+### 4.2.3 视频加载
+
+业务需要：视频需要有个加载过程
+
+```
+public interface OnProgressShowHide {
+        void show();//显示加载动画
+
+        void hide();//隐藏加载动画
+    }
+```
+   
+
+### 4.3视频播放操作方法
+
+如果没有特殊需求，不建议使用，以为只是展示web端的，并且内部都已经实现
+```
+getVideoType()//获取视频类型true 视频，false 音频，进入房间的时候时候判断
+
+seekToVideo() //视频跳转
+
+pauseVideo() //视频暂停
+
+```
+

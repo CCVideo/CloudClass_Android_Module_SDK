@@ -1,9 +1,13 @@
 package ccsskt.bokecc.base.example.base;
 
 import android.app.Dialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -13,9 +17,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+
 import com.bokecc.sskt.base.CCAtlasClient;
 import com.bokecc.sskt.base.MyBroadcastReceiver;
 import com.bokecc.sskt.base.bean.CCInteractBean;
+
+import java.util.Set;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -41,7 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public CCAtlasClient ccAtlasClient;
     protected CCInteractBean mCCInteractBean;
     protected MyBroadcastReceiver mMyBroadcastReceiver;
-
+    private AudioManager audioManager;
+//    private AppRTCAudioManager audioManager = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +64,21 @@ public abstract class BaseActivity extends AppCompatActivity {
             mHandler = new Handler();
             ccAtlasClient = CCAtlasClient.getInstance();
             initProgressDialog();
-            mMyBroadcastReceiver = MyBroadcastReceiver.getInstance();
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
-            intentFilter.addAction("android.intent.action.PHONE_STATE");
-            intentFilter.addAction("android.intent.action.HEADSET_PLUG");
-            registerReceiver(mMyBroadcastReceiver, intentFilter);
+            audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//            mMyBroadcastReceiver = MyBroadcastReceiver.getInstance();
+//            mMyBroadcastReceiver.initial(this,audioManager);
+////            mMyBroadcastReceiver.initial(audioManager);
+//            IntentFilter intentFilter = new IntentFilter();
+//            intentFilter.addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+//            intentFilter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
+//            intentFilter.addAction(AudioManager.ACTION_SCO_AUDIO_STATE_UPDATED);
+//            intentFilter.addAction("android.intent.action.PHONE_STATE");
+//            intentFilter.addAction("android.intent.action.HEADSET_PLUG");
+//            registerReceiver(mMyBroadcastReceiver, intentFilter);
             onViewCreated();
         }
+        // Create and audio manager that will take care of audio routing,
+        // audio modes, audio device enumeration etc.
 
     }
 
@@ -72,6 +87,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mUnbinder != null) {
             mUnbinder.unbind();
             mUnbinder = null;
+        }
+        if(ccAtlasClient != null){
+            ccAtlasClient.recycleClass();
         }
         super.onDestroy();
     }

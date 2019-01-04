@@ -34,6 +34,7 @@ import com.bokecc.sskt.base.CCAtlasClient;
 import com.bokecc.sskt.base.bean.CCUser;
 import com.bokecc.sskt.base.bean.ChatMsg;
 import com.bumptech.glide.Glide;
+
 import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.regex.Pattern;

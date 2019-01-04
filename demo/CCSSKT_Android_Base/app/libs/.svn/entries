@@ -1,7 +1,7 @@
 10
 
 dir
-9315
+10099
 svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Modu/app/libs
 svn://192.168.1.248:3380/om-dev
 
@@ -25,4 +25,64 @@ houbs
 
 
 c0e8f11c-a953-11e5-9218-8f706abcb27f
+
+ccclassroom-barleymodule.jar
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+svn:special svn:externals svn:needs-lock
+
+ccclassroom-base.jar
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+svn:special svn:externals svn:needs-lock
+
+ccclassroom-chatmodule.jar
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+svn:special svn:externals svn:needs-lock
+
+ccclassroom-docmodule.jar
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+svn:special svn:externals svn:needs-lock
 
