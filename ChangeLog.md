@@ -45,5 +45,3 @@ public interface OnVideoWHListener {
     }
 ```
 
-
-
