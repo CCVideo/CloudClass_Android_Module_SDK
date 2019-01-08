@@ -44,4 +44,3 @@ public interface OnVideoWHListener {
         void setVideoWH(int w, int h);
     }
 ```
-
