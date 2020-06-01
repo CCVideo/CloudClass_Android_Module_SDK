@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="22dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_toEndOf="@id/id_student_timer">
+
+    <LinearLayout
+        android:id="@+id/menu_top_user_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:background="@drawable/top_bg">
+
+        <ImageView
+            android:id="@+id/menu_top_class_icon"
+            android:layout_gravity="center_vertical"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="2dp"
+            android:src="@mipmap/top_class"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/menu_top_room_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="测试"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/menu_top_room_users"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="1个成员"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/menu_top_room_handup_flag"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="6dp"
+            android:src="@mipmap/top_hand"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="10dp"
+            android:src="@mipmap/top_arrows"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/menu_top_close"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/close_selector" />
+
+    <ImageButton
+        android:id="@+id/menu_top_video_controller"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@id/menu_top_close"
+        android:background="@drawable/draw_hide"
+        android:visibility="gone" />
+    <ImageButton
+        android:id="@+id/id_teacher_follow"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@id/menu_top_close"
+        android:background="@drawable/follow_selector"
+        android:visibility="gone"/>
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/student_reward_fl"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:id="@+id/student_reward_iv"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/student_cup" />
+
+    <TextView
+        android:id="@+id/id_student_reward_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+        android:gravity="center_horizontal"
+        android:text="恭喜你获得一个大大的奖励！"
+        android:textColor="#F27C19"
+        android:textSize="16sp" />
+
+</LinearLayout>
+

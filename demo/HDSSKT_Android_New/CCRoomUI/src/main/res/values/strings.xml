@@ -1,0 +1,68 @@
+<resources>
+    <string name="send_txt">发送</string>
+    <string name="cc_lecture_doc_prepare">文档正在准备中</string>
+
+    <string name="no_class_tip">还没上课，先休息一会吧</string>
+    <string name="teacher_leave_tip">老师暂时离开了，请稍等...</string>
+
+    <string name="setting_bitrate_720p">720P</string>
+    <string name="setting_bitrate_480p">480P</string>
+    <string name="setting_bitrate_240p">240P</string>
+
+    <string name="call_name">点名</string>
+    <string name="call_name_time">点名倒计时：</string>
+
+    <string name="vote_tip">答题卡</string>
+    <string name="commit_answer">提交答案</string>
+
+    <string name="self_answer_tip">您的答案：</string>
+    <string name="right_answer_tip">正确答案：</string>
+
+    <string name="brain_commit">提交</string>
+
+    <string name="doc_list_tip">请通过web端将文件上传至文档区</string>
+    <string name="lecture_no_doc_tip">文档区暂无文件</string>
+    <string name="doc_item_del">删除</string>
+    <string name="start_named_tip">发起点名</string>
+    <string name="set_time_tip">设置允许参与点名的时间</string>
+    <string name="restart_named">重新签到</string>
+
+
+    <string name="setting_gag">全体禁言</string>
+    <string name="setting_loop_play">视频轮播</string>
+    <string name="setting_close_mic">全体关麦</string>
+    <string name="setting_low_flow">低流量模式</string>
+    <string name="setting_mai">全体下麦</string>
+    <string name="setting_mirror">视频镜像</string>
+    <string name="setting_class_name">课堂名称</string>
+    <string name="setting_class_introduce">课堂简介</string>
+    <string name="setting_lianmai_mode">连麦模式</string>
+    <string name="setting_lianmai_free">自由连麦</string>
+    <string name="setting_lianmai_named">举手连麦</string>
+    <string name="setting_lianmai_auto">自动连麦</string>
+    <string name="setting_media_mode">连麦音视频</string>
+    <string name="setting_media_audio">音频连麦</string>
+    <string name="setting_media_both">视频连麦</string>
+    <string name="setting_loop_play_time">轮播频率</string>
+    <string name="setting_tbitrate">老师视频分辨率</string>
+    <string name="setting_sbitrate">学生视频分辨率</string>
+    <string name="setting_bitrate">视频分辨率</string>
+    <string name="setting_bitrate_lowest">最低</string>
+    <string name="setting_bitrate_lower">较低</string>
+    <string name="setting_bitrate_medium">中等</string>
+    <string name="setting_bitrate_higher">较高</string>
+    <string name="setting_bitrate_highest">最高</string>
+
+    <string name="kick_down_mai_tip">是否确定将学生全部踢下麦</string>
+    <string name="link_url">请输入课堂链接</string>
+
+    <string name="popup_cancel_txt">取消</string>
+    <string name="popup_ok_txt">确认</string>
+    <string-array name="mirror_mode">
+        <item>本地镜像远程不镜像</item>
+        <item>本地镜像远程镜像</item>
+        <item>本地不镜像远程不镜像</item>
+        <item>本地不镜像远程镜像</item>
+    </string-array>
+
+</resources>

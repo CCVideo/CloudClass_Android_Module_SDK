@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <Button
+        android:id="@+id/room_chat_bg_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:background="#33000000"
+        android:visibility="gone"/>
+
+    <!-- 聊天列表显示控件 -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/room_chat_list"
+        android:visibility="gone"
+        android:layout_width="240dp"
+        android:layout_height="150dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="68dp"
+        android:background="#00000000"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+
+    <!-- 发送图片 -->
+    <RelativeLayout
+        android:id="@+id/room_chat_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="#f2f2f2"
+        tools:visibility="visible"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/room_chat_send"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_btn"
+            android:text="@string/send_txt"
+            android:textColor="#ffffff" />
+
+        <ImageButton
+            android:id="@+id/room_chat_open_img"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="#f2f2f2"
+            android:src="@drawable/chat_open_img" />
+
+        <EditText
+            android:id="@+id/room_chat_input"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@id/room_chat_send"
+            android:layout_toEndOf="@+id/room_chat_open_img"
+            android:background="@mipmap/chat_input"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="#323232"
+            android:textCursorDrawable="@drawable/cursor_style"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <!-- 全屏图 -->
+    <ImageView
+        android:id="@+id/room_chat_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:background="@color/black"
+        android:visibility="gone"/>
+
+</FrameLayout>

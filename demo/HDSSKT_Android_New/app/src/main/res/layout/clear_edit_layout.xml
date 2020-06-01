@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/id_clear_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/edite"
+        android:imeOptions="flagNoExtractUi"
+        android:inputType="text"
+        android:hint="@string/link_url"
+        android:textColor="#323232"
+        android:textCursorDrawable="@drawable/cursor_style"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/id_clear_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:clickable="true"
+        android:padding="5dp"
+        android:src="@drawable/edit_clear"/>
+
+</RelativeLayout>

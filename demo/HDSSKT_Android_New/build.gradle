@@ -1,0 +1,33 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        // 配置私有仓库地址
+        maven {
+            url 'http://nexus-app.bokecc.com/repository/sdk-group/'
+        }
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+    }
+}
+
+allprojects {
+    repositories {
+        // 配置私有仓库地址
+        maven {
+            url 'http://nexus-app.bokecc.com/repository/sdk-group/'
+        }
+        google()
+        jcenter()
+    }
+}
+
+ext {
+    minSdkVersion = 19
+    targetSdkVersion = 28
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.3"
+}

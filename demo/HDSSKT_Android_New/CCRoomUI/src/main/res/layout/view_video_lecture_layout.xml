@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/id_lecture_doc_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 文档控件 -->
+        <com.bokecc.room.ui.view.doc.CCDocView
+            android:id="@+id/id_lecture_video_doc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <!-- 视频控件 -->
+        <FrameLayout
+            android:id="@+id/id_lecture_doc_video_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/video_big_box"
+            android:visibility="gone"/>
+
+
+    </FrameLayout>
+
+    <!-- 视频列表控件 -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/id_lecture_videos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_gravity="right"
+        android:overScrollMode="never"
+        android:scrollbars="none"/>
+
+</LinearLayout>

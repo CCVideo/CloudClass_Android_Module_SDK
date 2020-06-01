@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <SurfaceView
+        android:id="@+id/qr_code_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="visible"/>
+
+    <com.kaola.qrcodescanner.qrcode.view.QrCodeFinderView
+        android:id="@+id/qr_code_view_finder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/qr_code_header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/id_scan_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/title_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:maxEms="15"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/scan_title"
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/id_qr_album"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:gravity="center"
+            android:textColor="@drawable/qr_album_selector"
+            android:text="@string/qr_album"/>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/qr_code_view_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/qr_code_header_bar"
+        android:background="@android:color/black"
+        android:visibility="gone"/>
+
+</RelativeLayout>

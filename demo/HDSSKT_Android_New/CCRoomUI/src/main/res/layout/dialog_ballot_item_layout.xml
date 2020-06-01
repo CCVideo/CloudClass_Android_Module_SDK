@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_ballot_item"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:background="#CCCCCC">
+
+    <!--<ImageView-->
+        <!--android:id="@+id/id_ballot_icon"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:background="@drawable/circle_empty"-->
+        <!--android:layout_centerVertical="true"/>-->
+    <ImageView
+        android:id="@+id/id_ballot_item_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/id_ballot_item_num"
+        android:layout_centerVertical="true" />
+
+    <com.bokecc.room.ui.view.widget.FitHeightTextView
+        android:id="@+id/id_ballot_item_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        tools:ignore="RelativeOverlap" />
+
+    <ImageView
+        android:id="@+id/id_ballot_choose_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/choose_icon"
+        tools:ignore="ContentDescription"
+        android:visibility="gone"/>
+
+</RelativeLayout>

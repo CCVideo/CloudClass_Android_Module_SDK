@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#34373E">
+
+    <!-- 视频/文档区 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 模式一：文档模式 -->
+        <ViewStub
+            android:id="@+id/view_video_lecture_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/view_video_lecture_layout"/>
+
+        <!-- 模式二：主视频模式 -->
+        <ViewStub
+            android:id="@+id/view_video_main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/view_video_main_layout"/>
+
+        <!-- 模式三：平铺模式 -->
+        <ViewStub
+            android:id="@+id/view_video_tile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/view_video_tile_layout"/>
+
+        <!-- 直播间状态显示 -->
+        <LinearLayout
+            android:id="@+id/student_room_status_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/no_class" />
+
+            <TextView
+                android:id="@+id/student_room_status_tip_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:text="@string/no_class_tip"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- 暖场视频 -->
+    <com.bokecc.room.ui.view.video.widget.WarmUpVideoView
+        android:id="@+id/student_warm_up_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <!-- 计时器 -->
+    <com.bokecc.room.ui.view.widget.TimerWidget
+        android:id="@+id/id_student_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:visibility="gone"/>
+
+    <!-- 顶部菜单 -->
+    <com.bokecc.room.ui.view.menu.MenuTopView
+        android:id="@+id/menu_top_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/id_student_timer"/>
+
+    <!-- 底部菜单 -->
+    <com.bokecc.room.ui.view.menu.MenuBottomView
+        android:id="@+id/menu_bottom_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- 聊天控件 -->
+    <com.bokecc.room.ui.view.chat.ChatView
+        android:id="@+id/room_chat_cv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 互动：奖杯视图 -->
+    <com.bokecc.room.ui.view.widget.CupView
+        android:id="@+id/room_cup_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:orientation="vertical"/>
+    <!-- 屏幕共享，可以继续优化为按需加载 -->
+    <com.bokecc.room.ui.view.video.widget.SuspensionVideoView
+        android:id="@+id/student_share_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+    <!-- 辅助摄像头，可以继续优化为按需加载 -->
+    <com.bokecc.room.ui.view.video.widget.SuspensionVideoView
+        android:id="@+id/student_assist_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+    <!-- 插播音视频控件，可以继续优化为按需加载 -->
+    <com.bokecc.room.ui.view.video.widget.InterCutVideoView
+        android:id="@+id/student_remote_video_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+
+    <!-- 全屏视频 -->
+    <RelativeLayout
+        android:id="@+id/id_lecture_video_full_screen_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/id_lecture_video_full_screen_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/id_lecture_video_full_screen_no_video_layout"
+            android:background="@drawable/video_big_box"/>
+
+        <RelativeLayout
+            android:id="@+id/id_lecture_video_full_screen_no_video_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/camera_close_bg"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/id_lecture_video_full_screen_mic_close"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:src="@mipmap/mic_close_icon"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/id_lecture_video_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/exitfullscreen"/>
+
+    </RelativeLayout>
+    <!--更多菜单遮罩层-->
+    <!--<com.bokecc.room.ui.view.menu.MenuMoreTeacherView
+        android:id="@+id/id_teacher_blur_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>-->
+
+
+</RelativeLayout>

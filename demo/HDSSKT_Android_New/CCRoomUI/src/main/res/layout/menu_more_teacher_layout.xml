@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/id_teacher_blur_root"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#80000000"
+>
+<eightbitlab.com.blurview.BlurView
+    android:id="@+id/id_teacher_blur_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/id_teacher_blur_clickable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+        <ImageButton
+            android:id="@+id/id_teacher_blur_doc"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:background="@drawable/blur_doc"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"/>
+        <ImageButton
+            android:id="@+id/id_teacher_blur_update_img"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/blur_update_img"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="60dp"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/id_teacher_blur_named"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:background="@drawable/blur_roll"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="60dp"
+            android:visibility="gone"/>
+        <ImageButton
+            android:id="@+id/id_teacher_blur_setting"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/blur_setting"
+            android:layout_marginTop="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="60dp"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</eightbitlab.com.blurview.BlurView>
+</RelativeLayout>
+

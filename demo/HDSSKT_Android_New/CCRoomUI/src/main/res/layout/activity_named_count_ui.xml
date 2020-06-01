@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.bokecc.room.ui.view.widget.CirclePercentView xmlns:cp="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/id_named_count_percent"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        cp:cp_circle_starting_degree="-90"
+        cp:cp_finished_color="@color/colorPrimary"
+        cp:cp_finished_stroke_width="15dp"
+        cp:cp_inner_bottom_text="签到率"
+        cp:cp_inner_bottom_text_color="@color/colorPrimary"
+        cp:cp_inner_bottom_text_margin_top="22dp"
+        cp:cp_inner_bottom_text_size="10sp"
+        cp:cp_show_text="true"
+        cp:cp_text_color="@color/colorPrimary"
+        cp:cp_text_size="25sp"
+        cp:cp_unfinished_color="#cccccc"
+        cp:cp_unfinished_stroke_width="11dp" />
+
+    <TextView
+        android:id="@+id/id_named_count_onlines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/id_named_count_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/id_named_count_restart"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_btn"
+        android:text="@string/restart_named"
+        android:textColor="#ffffff"/>
+
+</LinearLayout>

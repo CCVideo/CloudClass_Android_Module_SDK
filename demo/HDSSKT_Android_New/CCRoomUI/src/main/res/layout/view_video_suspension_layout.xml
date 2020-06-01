@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_student_share_screen_container"
+    android:layout_width="160dp"
+    android:layout_height="90dp"
+    android:background="#000000"
+    android:clickable="true">
+
+    <SurfaceView
+        android:id="@+id/id_student_share_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <ImageView
+        android:id="@+id/id_student_share_screen_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/exitfullscreen"
+        android:visibility="gone" />
+
+</FrameLayout>

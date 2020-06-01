@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?><!--底部操作区域-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_teacher_bottom_layout"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:layout_alignParentBottom="true"
+    android:paddingBottom="10dp">
+
+    <FrameLayout style="@style/TeacherBottomItemLayoutStyle">
+
+        <ImageButton
+            android:id="@+id/id_teacher_chat"
+            style="@style/TeacherBottomBtnStyle"
+            android:background="@drawable/chat_selector" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3">
+
+        <RelativeLayout
+            android:id="@+id/id_teacher_start_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/id_teacher_start"
+                android:layout_width="180dp"
+                android:layout_height="42dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/start_selector" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/id_teacher_stop_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:visibility="visible"
+            android:visibility="gone">
+
+            <FrameLayout style="@style/TeacherBottomItemLayoutStyle">
+
+                <ImageButton
+                    android:id="@+id/id_teacher_camera"
+                    style="@style/TeacherBottomBtnStyle"
+                    android:background="@drawable/camera_selector" />
+            </FrameLayout>
+
+            <FrameLayout style="@style/TeacherBottomItemLayoutStyle">
+
+                <ImageButton
+                    android:id="@+id/id_teacher_stop"
+                    style="@style/TeacherBottomBtnStyle"
+                    android:background="@drawable/stop_selector" />
+            </FrameLayout>
+
+            <FrameLayout style="@style/TeacherBottomItemLayoutStyle">
+
+                <ImageButton
+                    android:id="@+id/id_teacher_mic"
+                    style="@style/TeacherBottomBtnStyle"
+                    android:background="@drawable/mic_selector" />
+            </FrameLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout style="@style/TeacherBottomItemLayoutStyle">
+
+        <ImageButton
+            android:id="@+id/id_teacher_more"
+            style="@style/TeacherBottomBtnStyle"
+            android:background="@drawable/more_selector" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_lecture_doc_rotate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">-->
+
+    <!-- 文档区域 -->
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/id_lecture_doc_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+       >
+
+    <com.bokecc.room.ui.view.widget.CCDocRelativeLayout
+        android:id="@+id/bigContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- 文档 -->
+        <com.bokecc.ccdocview.DocWebView
+            android:id="@+id/id_lecture_docppt_display"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+
+            <com.bokecc.ccdocview.DocView
+                android:id="@+id/id_lecture_doc_display"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.bokecc.ccdocview.DocWebView>
+
+    </com.bokecc.room.ui.view.widget.CCDocRelativeLayout>
+        <!-- 上一页 -->
+        <ImageButton
+            android:id="@+id/id_lecture_doc_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/doc_back" />
+
+        <!-- 下一页 -->
+        <ImageButton
+            android:id="@+id/id_lecture_doc_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/doc_forward" />
+
+
+        <!-- 文档加载视图 -->
+        <RelativeLayout
+            android:id="@+id/id_lecture_prepare_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80ffffff"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/id_lecture_pb"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:max="100"
+                android:progress="20"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/id_lecture_doc_update_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/id_lecture_pb"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/cc_lecture_doc_prepare"
+                />
+
+        </RelativeLayout>
+
+        <!-- 文档底边菜单 -->
+        <RelativeLayout
+            android:id="@+id/id_lecture_doc_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp">
+
+            <ImageButton
+                android:id="@+id/id_lecture_doc_fullscreen"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/fullscreen"/>
+
+            <ImageButton
+                android:id="@+id/id_lecture_doc_img_grid"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/doc_img_grid_selector"/>
+
+
+            <ImageButton
+                android:id="@+id/id_lecture_doc_exit_fullscreen"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/doc_exitfullscreen"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+    <Button
+        android:id="@+id/gestureButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:textSize="15dp"
+        android:text="手势模式"
+        />
+
+
+        <!-- 暂时未发现使用 -->
+        <!--<ProgressBar
+            android:id="@+id/id_lecture_doc_progress"
+            style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:progressDrawable="@drawable/doc_progress_drawable" />-->
+
+
+        <!-- 文档顶部菜单 -->
+        <LinearLayout
+            android:id="@+id/id_lecture_drag_child"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="19dp"
+            android:background="@drawable/draw_bar_bg"
+            android:orientation="horizontal"
+            android:paddingEnd="18dp"
+            android:paddingStart="18dp"
+            tools:visibility="visible"
+            android:visibility="gone">
+
+            <ImageButton
+                android:id="@+id/id_lecture_draw_paint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/draw_paint"/>
+
+            <ImageButton
+                android:id="@+id/id_lecture_draw_undo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/draw_undo" />
+
+            <ImageButton
+                android:id="@+id/id_lecture_draw_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/doc_clear"
+                android:visibility="visible"/>
+
+            <LinearLayout
+                android:id="@+id/id_lecture_page_change_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="7dp"
+                    android:background="#ffffff"/>
+
+                <ImageButton
+                    android:id="@+id/id_lecture_bar_doc_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/doc_back_teacher"/>
+
+                <TextView
+                    android:id="@+id/id_lecture_bar_doc_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center"
+                    android:text="0/0"
+                    android:textColor="#ffffff"/>
+
+                <ImageButton
+                    android:id="@+id/id_lecture_bar_doc_forward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/doc_forward_teacher"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/controller_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="#ffffff"
+                    android:layout_marginStart="5dp"/>
+
+                <ImageView
+                    android:id="@+id/id_teacher_draw_tbc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/draw_bar_controller"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
