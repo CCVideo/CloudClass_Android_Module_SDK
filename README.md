@@ -65,15 +65,13 @@ CC视频云课堂 Android端组件化SDK
 ![Alt](https://doc.bokecc.com/class/developer/android/document/pic.jpg)
 注：快速集成主要提供的是推流和拉流的功能(核心功能)。白板、聊天以及排麦组件另有开发文档描述。
 
-首先，需要下载最新版本的SDK，[下载地址]()
-
 ### 3.1 第一步：引入远程包
 
 ```java
 dependencies {
     //云课堂sdk引用
-    api 'com.bokecc:ClassBaseLib:6.1.3'//基础库
-    api 'com.bokecc:docLib:1.0.1'//文档库 
+    api 'com.bokecc:ClassBaseLib:6.1.10'//基础库
+    api 'com.bokecc:docLib:1.0.7'//文档库 
 }
 ```
 
