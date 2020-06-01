@@ -120,6 +120,8 @@ public class Config {
     public static final int INTERACT_EVENT_WHAT_STREAM_SWITCH_ERROR = 0x1069;
     public static final int INTERACT_EVENT_WHAT_STREAM_SWITCH_STUDENT_DOWNMAI = 0x1070;
 
+    public static final int INTERACT_EVENT_WHAT_STREAM_INIT = 0x1071;
+
     public static final String MIRRORING_MODE = "mirror_mode";
     
     /**

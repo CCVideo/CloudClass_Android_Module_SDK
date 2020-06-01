@@ -1,9 +1,11 @@
 package com.bokecc.room.ui.view.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -61,6 +63,8 @@ import org.json.JSONObject;;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -188,16 +192,6 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
         }
     }
 
-   /* @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onInteractEvent(CCUser user) {
-        if (user.getUserRole() == CCAtlasClient.AUDITOR) {
-            mClickAuditorId = user.getUserId();
-            showAuditor();
-        } else {
-            updateOrShowUserPopup(user);
-        }
-    }
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -206,7 +200,6 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
         }
         initView();
         initListener();
-
     }
 
 
@@ -425,7 +418,7 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
             selfStream.setUserRole(PRESENTER);
             mSelfStreamView.setStream(selfStream);
         }
-        TeacherRoomActivityPermissionsDispatcher.startPreviewWithPermissionCheck(this);
+//        TeacherRoomActivityPermissionsDispatcher.startPreviewWithPermissionCheck(this);
 
         //聊天发送
         setChatView(R.id.room_chat_cv);
@@ -554,6 +547,14 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
         if (sClassDirection == 1 && templateType == CCAtlasClient.TEMPLATE_SPEAK) {
             menuTopView.setVideoControllerShown(true);
         }
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                TeacherRoomActivityPermissionsDispatcher.startPreviewWithPermissionCheck(TeacherRoomActivity.this);
+            }
+        }, 1000);
 
     }
 
@@ -1279,6 +1280,13 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
             case Config.INTERACT_EVENT_WHAT_STREAM_SWITCH_ERROR:
                 dismissLoading();
                 showExitDialogOneBtn("优化线路失败，请重新进入房间！");
+                break;
+            case Config.INTERACT_EVENT_WHAT_STREAM_INIT:
+                if((Boolean)event.obj){
+                    Tools.log("流媒体初始化成功！");
+                }else{
+                    Tools.log("流媒体初始化失败！");
+                }
                 break;
         }
     }

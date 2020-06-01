@@ -649,8 +649,7 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
                     if (mCCAtlasClient.getInteractBean() != null && mCCAtlasClient.getInteractBean().getLianmaiMode() == LIANMAI_MODE_NAMED) {
                         // 点名连麦模式
                         boolean flag = false;
-                        for (CCUser user :
-                                users) {
+                        for (CCUser user : users) {
                             if (user.getLianmaiStatus() == LIANMAI_STATUS_IN_MAI) {
                                 flag = true;
                                 break;
@@ -1300,8 +1299,7 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
      */
     private void sortUser(ArrayList<CCUser> users) {
         ArrayList<CCUser> compareUsers = new ArrayList<>();
-        for (CCUser user :
-                users) {
+        for (CCUser user : users) {
             if (user.getLianmaiStatus() == LIANMAI_STATUS_IN_MAI ||
                     user.getLianmaiStatus() == LIANMAI_STATUS_UP_MAI) {
                 compareUsers.add(user);
@@ -1309,8 +1307,7 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
         }
         Collections.sort(compareUsers, new UserComparator());
         mQueueIndex = 1;
-        for (CCUser user :
-                compareUsers) {
+        for (CCUser user : compareUsers) {
             if (user.getUserId().equals(mCCAtlasClient.getUserIdInPusher())) {
                 updateMaiButton(MAI_STATUS_QUEUE);
                 break;

@@ -252,7 +252,7 @@ public class MenuTopView extends RelativeLayout {
 //            userListDialog.updateData(listener.getUserList());
 //        }
         menu_top_room_users.setText(count + "个成员");
-        if(userListDialog.isShowing()){
+        if(userListDialog != null && userListDialog.isShowing()){
             userListDialog.updateData(listener.getUserList());
         }
     }

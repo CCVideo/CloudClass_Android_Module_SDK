@@ -19,9 +19,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //云课堂sdk引用
-    api 'com.bokecc:ClassBaseLib:6.1.3'//基础库
-    api 'com.bokecc:docLib:1.0.1'//文档库
+    //本地依赖
+//    api project(':ssktbaselibrary')//引用基础包
+//    api project(':ccdoclibrary')//引用文档库
+    //远程依赖
+    api 'com.bokecc:ClassBaseLib:6.1.10'//引用基础包
+    api 'com.bokecc:docLib:1.0.7'//引用文档库
 
     //eventbus
     implementation 'org.greenrobot:eventbus:3.1.1'

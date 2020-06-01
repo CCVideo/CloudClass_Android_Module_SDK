@@ -271,7 +271,27 @@ public class InteractSessionManager {
         }
 
         @Override
-        public void onStreamError() {//流发生错误
+        public void onServerInitSuccess() {
+            mEventBus.post(new MyEBEvent(Config.INTERACT_EVENT_WHAT_STREAM_INIT, true));
+        }
+
+        @Override
+        public void onServerInitFail() {
+            mEventBus.post(new MyEBEvent(Config.INTERACT_EVENT_WHAT_STREAM_INIT, false));
+        }
+
+        @Override
+        public void onServerConnected() {
+
+        }
+
+        @Override
+        public void onServerReconnect() {
+
+        }
+
+        @Override
+        public void onStreamError() {
             mEventBus.post(new MyEBEvent(Config.INTERACT_EVENT_WHAT_STREAM_ERROR));
         }
 
