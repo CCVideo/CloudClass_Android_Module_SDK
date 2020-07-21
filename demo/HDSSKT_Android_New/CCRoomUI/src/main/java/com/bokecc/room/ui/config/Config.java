@@ -99,6 +99,7 @@ public class Config {
     public static final int INTERACT_EVENT_WHAT_BALLOT_RESULT = 0x1051;
     public static final int INTERACT_EVENT_WHAT_SEND_CUP = 0x1052;
     public static final int INTERACT_EVENT_WHAT_SEND_FLOWER = 0x1053;
+    public static final int INTERACT_EVENT_WHAT_SEND_HAMMER = 0x1153;
     public static final int INTERACT_EVENT_WHAT_STREAM_START = 0x1054;
     public static final int INTERACT_EVENT_WHAT_ATLAS_SERVER_DISCONNECTED = 0x1055;
     public static final int INTERACT_EVENT_WHAT_PUBLISH_DISCONNECTED = 0x1056;

@@ -662,16 +662,7 @@ public class CCDocView extends RelativeLayout implements View.OnClickListener, R
 
                 mGestureViewBinder.setFullGroup(true);
                 bigContainer.setBackgroundColor(Color.WHITE);
-                CCDocViewManager.getInstance().setDocPageChangeListener(new CCDocViewManager.OnDocPageChangeListener() {
-                    @Override
-                    public void onDocPageChange(String docID) {
-                        if((isDocFullScreen||orientation==1)&&!TextUtils.equals(docID,lastDocId)){
-                            mGestureViewBinder.setBigBack();
-                            lastDocId = docID;
-                        }
-
-                    }
-                });
+                CCDocViewManager.getInstance().setDocPageChangeListener(new CCDocChangeListener());
             }
             mGestureViewBinder.setGestureEnable(true);
 
@@ -682,6 +673,17 @@ public class CCDocView extends RelativeLayout implements View.OnClickListener, R
 
     }
 
+    private class CCDocChangeListener implements CCDocViewManager.OnDocPageChangeListener{
+
+        @Override
+        public void onDocPageChange(String docID) {
+            if((isDocFullScreen||orientation==1)&&!TextUtils.equals(docID,lastDocId)){
+                if(mGestureViewBinder!=null)
+                mGestureViewBinder.setBigBack();
+                lastDocId = docID;
+            }
+        }
+    }
     private class HiddenBottomRunnable implements Runnable {
 
         @Override

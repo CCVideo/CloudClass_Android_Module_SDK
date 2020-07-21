@@ -101,34 +101,46 @@
         android:src="@mipmap/list_draw_icon"
         android:visibility="gone" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/id_user_status_reward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@id/id_user_name"
+        android:layout_marginStart="15dp"
         android:visibility="gone">
 
-        <ImageView
+        <TextView
             android:id="@+id/id_user_status_flower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/teacher_item_flower"
+            android:layout_marginStart="15dp"
+            android:drawableStart="@mipmap/teacher_item_flower"
+            android:textSize="12sp"
+            android:gravity="bottom"
             android:visibility="gone" />
 
-        <ImageView
+        <TextView
             android:id="@+id/id_user_status_cup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/student_item_cup"
+            android:layout_marginStart="15dp"
+            android:drawableStart="@mipmap/student_item_cup"
+            android:textSize="12sp"
+            android:gravity="bottom"
             android:visibility="gone" />
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/id_user_status_hammer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textSize="12sp"
+            android:drawableStart="@mipmap/cc_icon_hammer"
+            android:gravity="bottom"
+            android:visibility="gone" />
+    </LinearLayout>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/id_reward_item_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,6 +148,6 @@
         android:layout_toEndOf="@+id/id_user_status_reward"
         android:gravity="center"
         android:textSize="12sp"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
 
 </RelativeLayout>

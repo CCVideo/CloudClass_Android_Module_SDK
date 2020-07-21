@@ -39,25 +39,40 @@ public class RoomUserAdapter extends BaseRecycleAdapter<RoomUserAdapter.RoomUser
         RoomUser roomUser = mDatas.get(position);
         final CCUser user = roomUser.getUser();
 
-        if(user.getSendCup()){
+        if(user.getCupIndex()>0){
             holder.mReward.setVisibility(View.VISIBLE);
             holder.mCup.setVisibility(View.VISIBLE);
-            holder.mRewardSize.setVisibility(View.VISIBLE);
-            holder.mRewardSize.setText("x" + user.getCupIndex());
+            holder.mCup.setText("x" + user.getCupIndex());
+//            holder.mRewardSize.setVisibility(View.VISIBLE);
+//            holder.mRewardSize.setText("x" + user.getCupIndex());
+        }else {
+            holder.mCup.setVisibility(View.GONE);
         }
-
+        if(user.getRewardHammerIndex()>0){
+            holder.mReward.setVisibility(View.VISIBLE);
+            holder.mHammer.setVisibility(View.VISIBLE);
+            holder.mHammer.setText("x" + user.getRewardHammerIndex());
+//            holder.mRewardSize.setVisibility(View.VISIBLE);
+//            holder.mRewardSize.setText("x" + user.getCupIndex());
+        }else {
+            holder.mHammer.setVisibility(View.GONE);
+        }
         if (user.getSendFlower()) {
             holder.mReward.setVisibility(View.VISIBLE);
             holder.mFlower.setVisibility(View.VISIBLE);
-            holder.mRewardSize.setVisibility(View.VISIBLE);
-            holder.mRewardSize.setText("x" + user.getFlowerIndex());
+            holder.mFlower.setText("x" + user.getFlowerIndex());
+        }else {
+            holder.mFlower.setVisibility(View.GONE);
+        }
+        if(user.getCupIndex()==0&&user.getRewardHammerIndex()==0&&user.getFlowerIndex()==0){
+            holder.mReward.setVisibility(View.GONE);
         }
 
-        if(!user.getSendFlower()&& !user.getSendCup()){
+        /*if(!(user.getCupIndex()>0)&& !user.getSendCup()){
             holder.mReward.setVisibility(View.GONE);
             holder.mFlower.setVisibility(View.GONE);
-            holder.mRewardSize.setVisibility(View.GONE);
-        }
+//            holder.mRewardSize.setVisibility(View.GONE);
+        }*/
 
         if (mType == CCAtlasClient.PRESENTER && user.getUserRole() != CCAtlasClient.PRESENTER) {
             holder.mArrow.setVisibility(View.VISIBLE);
@@ -122,11 +137,14 @@ public class RoomUserAdapter extends BaseRecycleAdapter<RoomUserAdapter.RoomUser
         holder.mUserName.setText(user.getUserName());
         if (user.getUserRole() == CCAtlasClient.PRESENTER) {
             holder.mIdentity.setVisibility(View.VISIBLE);
+            holder.mIdentity.setImageResource(R.mipmap.user_identity_teacher);
             holder.mGag.setVisibility(View.GONE);
             holder.mLianmai.setVisibility(View.VISIBLE);
+            holder.mDraw.setVisibility(View.GONE);
         } else if(user.getUserRole() == CCAtlasClient.ASSISTANT) {
+            holder.mDraw.setVisibility(View.GONE);
             holder.mIdentity.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(R.mipmap.assistant_ident).into(holder.mIdentity);
+            holder.mIdentity.setImageResource(R.mipmap.assistant_ident);
             holder.mLianmai.setVisibility(View.VISIBLE);
             if (!user.getUserSetting().isAllowChat()) {
                 RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.mGag.getLayoutParams();
@@ -230,7 +248,9 @@ public class RoomUserAdapter extends BaseRecycleAdapter<RoomUserAdapter.RoomUser
                 }
             });
         }
-
+        if(!CCAtlasClient.getInstance().isRoomLive()){
+            holder.mLianmai.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -255,10 +275,11 @@ public class RoomUserAdapter extends BaseRecycleAdapter<RoomUserAdapter.RoomUser
         private ImageView mDraw;
         private ImageView mArrow;
         private ImageView mHand;
-        private RelativeLayout mReward;
-        private ImageView mFlower;
-        private ImageView mCup;
-        private TextView mRewardSize;
+        private View mReward;
+        private TextView mFlower;
+        private TextView mCup;
+        private TextView mHammer;
+//        private TextView mRewardSize;
         private View itemView;
 
         RoomUserViewHolder(View itemView) {
@@ -277,7 +298,8 @@ public class RoomUserAdapter extends BaseRecycleAdapter<RoomUserAdapter.RoomUser
             mReward = itemView.findViewById(R.id.id_user_status_reward);
             mFlower = itemView.findViewById(R.id.id_user_status_flower);
             mCup = itemView.findViewById(R.id.id_user_status_cup);
-            mRewardSize = itemView.findViewById(R.id.id_reward_item_size);
+            mHammer = itemView.findViewById(R.id.id_user_status_hammer);
+//            mRewardSize = itemView.findViewById(R.id.id_reward_item_size);
         }
     }
 

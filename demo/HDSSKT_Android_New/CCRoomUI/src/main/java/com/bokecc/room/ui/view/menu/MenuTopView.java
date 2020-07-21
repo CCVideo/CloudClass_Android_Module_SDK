@@ -89,7 +89,7 @@ public class MenuTopView extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (userListDialog == null) {
-                    userListDialog = new UserListDialog(context,listener);
+                    userListDialog = new UserListDialog(context, listener);
                     mRootView = userListDialog.getWindow().getDecorView().findViewById(android.R.id.content);
                 } else
                     userListDialog.initData();
@@ -110,7 +110,7 @@ public class MenuTopView extends RelativeLayout {
         teacher_follow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listener!=null)
+                if (listener != null)
                     listener.videoFollow();
             }
         });
@@ -120,8 +120,8 @@ public class MenuTopView extends RelativeLayout {
             public void onClick(View v) {
                 isVideoShow = !isVideoShow;
                 video_controller.setBackgroundResource(isVideoShow ? R.drawable.draw_hide : R.mipmap.draw_hide_on);
-                if(listener!=null)
-                listener.videoController(isVideoShow);
+                if (listener != null)
+                    listener.videoController(isVideoShow);
             }
         });
 
@@ -130,9 +130,9 @@ public class MenuTopView extends RelativeLayout {
 
     }
 
-    public void showHandupIcon(boolean isShow){
-        if(menu_top_room_handup_flag!=null)
-        menu_top_room_handup_flag.setVisibility(isShow?VISIBLE:GONE);
+    public void showHandupIcon(boolean isShow) {
+        if (menu_top_room_handup_flag != null)
+            menu_top_room_handup_flag.setVisibility(isShow ? VISIBLE : GONE);
     }
 
 
@@ -199,6 +199,23 @@ public class MenuTopView extends RelativeLayout {
         clearAnimation();
     }
 
+    /**
+     * 课程结束清空奖杯
+     */
+    public void endClass() {
+        if (userListDialog != null && userListDialog.isShowing() && listener != null) {
+            ArrayList<CCUser> userList = listener.getUserList();
+            if(userList!=null){
+                for (CCUser ccUser : userList) {
+                    ccUser.setCupIndex(0);
+                    ccUser.setRewardHammerIndex(0);
+                }
+                userListDialog.updateData(userList);
+            }
+
+        }
+    }
+
     private class HiddenTopRunnable implements Runnable {
 
         @Override
@@ -252,38 +269,40 @@ public class MenuTopView extends RelativeLayout {
 //            userListDialog.updateData(listener.getUserList());
 //        }
         menu_top_room_users.setText(count + "个成员");
-        if(userListDialog != null && userListDialog.isShowing()){
-            userListDialog.updateData(listener.getUserList());
-        }
     }
 
     /**
      * 设置奖杯个数
+     *
      * @param users
      */
     public void setUserCupCount(ArrayList<CCUser> users) {
         if (userListDialog != null && userListDialog.isShowing() && listener != null) {
-            for (int i= 0;i<listener.getUserList().size();i++){
-                for (CCUser ccUserCup: users){
-                    if(listener.getUserList().get(i).getUserId().equals(ccUserCup.getUserId())){
-                        listener.getUserList().get(i).setCupIndex(ccUserCup.getCupIndex());
+            ArrayList<CCUser> userList = listener.getUserList();
+            for (int i = 0; i < userList.size(); i++) {
+                for (CCUser ccUserCup : users) {
+                    CCUser user = userList.get(i);
+                    if (user.getUserId().equals(ccUserCup.getUserId())) {
+                        user.setCupIndex(ccUserCup.getCupIndex());
+                        user.setRewardHammerIndex(ccUserCup.getRewardHammerIndex());
                     }
                 }
             }
-            userListDialog.updateData(listener.getUserList());
+            userListDialog.updateData(userList);
         }
     }
+
     /**
      * 设置视频控制器按钮显示
      *
      * @param isShow isShow
      */
     public void setVideoControllerShown(boolean isShow) {
-        video_controller.setVisibility(isShow?VISIBLE:GONE);
+        video_controller.setVisibility(isShow ? VISIBLE : GONE);
     }
 
-    public boolean isVideoControllerShow(){
-        return video_controller!=null&&video_controller.getVisibility()==VISIBLE;
+    public boolean isVideoControllerShow() {
+        return video_controller != null && video_controller.getVisibility() == VISIBLE;
     }
 
     /**
@@ -292,12 +311,12 @@ public class MenuTopView extends RelativeLayout {
      * @param isShow isShow
      */
     public void setVideoFollowShow(boolean isShow) {
-        teacher_follow.setVisibility(isShow?VISIBLE:GONE);
+        teacher_follow.setVisibility(isShow ? VISIBLE : GONE);
     }
 
-    public void setFollowEnable(boolean canFollow){
+    public void setFollowEnable(boolean canFollow) {
         isVideoFollow = canFollow;
-        teacher_follow.setBackgroundResource(canFollow?R.mipmap.follow_on:R.drawable.follow_selector);
+        teacher_follow.setBackgroundResource(canFollow ? R.mipmap.follow_on : R.drawable.follow_selector);
     }
 
     /**
@@ -318,5 +337,12 @@ public class MenuTopView extends RelativeLayout {
         void onClickUser(CCUser user, int position);
     }
 
+    /**
+     * 用户列表
+     * @return
+     */
+    public boolean getUserListDialogShowing() {
+        return userListDialog!=null&&userListDialog.isShowing();
+    }
 
 }

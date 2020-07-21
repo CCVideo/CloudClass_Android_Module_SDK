@@ -62,6 +62,7 @@ import org.json.JSONException;
 import org.json.JSONObject;;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -987,6 +988,7 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
             case Config.INTERACT_EVENT_WHAT_USER_COUNT:
                 int mCount = (Integer) event.obj + (Integer) event.obj2;
                 menuTopView.setUserCount(mCount);
+                upDataCup();
                 break;
             case Config.INTERACT_EVENT_WHAT_HANDUP:
                 boolean isHandup = (boolean) event.obj2;
@@ -1183,12 +1185,12 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
 
             case Config.INTERACT_EVENT_WHAT_SEND_CUP:
                 SendReward cup = (SendReward) event.obj;
-                setOnUserCupCountListener(new StudentRoomActivity.OnUserCupCountListener() {
-                    @Override
-                    public void getUserCupCount(ArrayList<CCUser> users) {
-                        menuTopView.setUserCupCount(users);
-                    }
-                });
+//                setOnUserCupCountListener(new StudentRoomActivity.OnUserCupCountListener() {
+//                    @Override
+//                    public void getUserCupCount(ArrayList<CCUser> users) {
+//                        menuTopView.setUserCupCount(users);
+//                    }
+//                });
                 upDataCup();
                 if (mCCAtlasClient.getInteractBean() != null && !mCCAtlasClient.getInteractBean().getUserId().equals(cup.getUserId())) {
                     String username = cup.getUserName();
@@ -1900,14 +1902,17 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
             mIconPopup.show(mRoot, position, videoStreamView);
         }
     }
-    private StudentRoomActivity.OnUserCupCountListener onUserCupCountListener;
-    private void setOnUserCupCountListener(StudentRoomActivity.OnUserCupCountListener onUserCupCountListener){
-        this.onUserCupCountListener = onUserCupCountListener;
-    }
-    interface OnUserCupCountListener{
-        void getUserCupCount(ArrayList<CCUser> users);
-    }
+//    private StudentRoomActivity.OnUserCupCountListener onUserCupCountListener;
+//    private void setOnUserCupCountListener(StudentRoomActivity.OnUserCupCountListener onUserCupCountListener){
+//        this.onUserCupCountListener = onUserCupCountListener;
+//    }
+//    interface OnUserCupCountListener{
+//        void getUserCupCount(ArrayList<CCUser> users);
+//    }
     public void upDataCup(){
+        if(!menuTopView.getUserListDialogShowing()){
+            return;
+        }
         mCCAtlasClient.getLiveStatus(new CCAtlasCallBack<CCStartBean>() {
             @Override
             public void onSuccess(CCStartBean ccStartBean) {
@@ -1922,6 +1927,7 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
                             JSONObject jsonObject = data.getJSONObject("data");
                             JSONObject total_cup = jsonObject.getJSONObject("total_cup");
                             Iterator<String> cup_Iterator = total_cup.keys();
+                            HashMap<String,CCUser> hashMap = new HashMap<>();
                             final ArrayList<CCUser> users = new ArrayList<>();
                             while (cup_Iterator.hasNext()) {
                                 // 获得key
@@ -1931,12 +1937,28 @@ public class TeacherRoomActivity extends CCRoomActivity implements OnVideoClickL
                                 ccUser.setCupIndex(total_cup.getInt(cupKey));
                                 ccUser.setSendCup(true);
                                 users.add(ccUser);
+                                hashMap.put(cupKey,ccUser);
                             }
-                            if(onUserCupCountListener!=null){
-                                onUserCupCountListener.getUserCupCount(users);
+                            JSONObject total_hammer = jsonObject.optJSONObject("total_hammer");
+                            if(total_hammer!=null){
+                                Iterator<String> hammer_Iterator = total_hammer.keys();
+                                while (hammer_Iterator.hasNext()) {
+                                    // 获得key
+                                    String hammerKey = hammer_Iterator.next();
+                                    CCUser ccUser = hashMap.get(hammerKey);
+                                    if(ccUser==null){
+                                        ccUser = new CCUser();
+                                        users.add(ccUser);
+                                    }
+                                    ccUser.setRewardHammerIndex(total_hammer.getInt(hammerKey));
+                                }
                             }
-                        } catch (JSONException e) {
 
+                            if(menuTopView!=null){
+                                menuTopView.setUserCupCount(users);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
 

@@ -43,6 +43,7 @@ import com.bokecc.room.ui.view.video.MainVideoManager;
 import com.bokecc.room.ui.view.video.widget.SuspensionVideoView;
 import com.bokecc.room.ui.view.video.TileVideoManager;
 import com.bokecc.room.ui.view.widget.CupView;
+import com.bokecc.room.ui.view.widget.HammerView;
 import com.bokecc.room.ui.view.widget.TimerWidget;
 import com.bokecc.sskt.base.CCAtlasClient;
 import com.bokecc.sskt.base.bean.Ballot;
@@ -70,6 +71,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
@@ -132,6 +134,11 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
      * 奖杯视图
      */
     private CupView cupView;
+    /**
+     * 锤子视图
+     */
+    private HammerView hammerView;
+
     /**
      * 顶部菜单
      */
@@ -273,6 +280,8 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
         warmUpVideoView.setPortrait(sClassDirection == 0);
         //奖杯视图
         cupView = findViewById(R.id.room_cup_view);
+        //锤子视图
+        hammerView = findViewById(R.id.room_hammer_view);
 
         //顶部菜单
         menuTopView = findViewById(R.id.menu_top_rl);
@@ -586,6 +595,8 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
                 case Config.INTERACT_EVENT_WHAT_USER_COUNT://更新房间人数
                     int mCount = (Integer) event.obj + (Integer) event.obj2;
                     menuTopView.setUserCount(mCount);
+
+                    upDataCup();
                     break;
                 case Config.INTERACT_EVENT_WHAT_USER_GAG://被禁言监听事件
                     updateChatStatus((String) event.obj, (Boolean) event.obj2);
@@ -845,12 +856,7 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
                     break;
                 case Config.INTERACT_EVENT_WHAT_SEND_CUP://发奖杯
                     SendReward cup = (SendReward) event.obj;
-                    setOnUserCupCountListener(new OnUserCupCountListener() {
-                        @Override
-                        public void getUserCupCount(ArrayList<CCUser> users) {
-                            menuTopView.setUserCupCount(users);
-                        }
-                    });
+
                     upDataCup();
                     if (mCCAtlasClient.getInteractBean() != null && !mCCAtlasClient.getInteractBean().getUserId().equals(cup.getUserId())) {
                         String username = cup.getUserName();
@@ -859,6 +865,17 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
                         cupView.startRewardAnim("");
                     }
                     break;
+                case Config.INTERACT_EVENT_WHAT_SEND_HAMMER://发锤子
+                    upDataCup();
+                    SendReward hammer = (SendReward) event.obj;
+                    if (mCCAtlasClient.getInteractBean() != null && !mCCAtlasClient.getInteractBean().getUserId().equals(hammer.getUserId())) {
+                        String username = hammer.getUserName();
+                        hammerView.startRewardAnim(username);
+                    } else {
+                        hammerView.startRewardAnim("");
+                    }
+                    break;
+
                 case Config.INTERACT_EVENT_WHAT_ATLAS_SERVER_DISCONNECTED:
 //                    Tools.showToast("流服务断开");
 //                    updateList4Unpublish();
@@ -1066,6 +1083,7 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
         if (mVideoManager != null) {
             mVideoManager.setVisibility(View.INVISIBLE);
         }
+        menuTopView.endClass();
         menuTopView.removeAnimation();
         menuBottomView.removeAnimation();
         menuTopView.postDelayed(new Runnable() {
@@ -1904,18 +1922,10 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
 
         }
     }
-
-    private OnUserCupCountListener onUserCupCountListener;
-
-    private void setOnUserCupCountListener(OnUserCupCountListener onUserCupCountListener) {
-        this.onUserCupCountListener = onUserCupCountListener;
-    }
-
-    interface OnUserCupCountListener {
-        void getUserCupCount(ArrayList<CCUser> users);
-    }
-
     public void upDataCup() {
+        if(!menuTopView.getUserListDialogShowing()){
+            return;
+        }
         mCCAtlasClient.getLiveStatus(new CCAtlasCallBack<CCStartBean>() {
             @Override
             public void onSuccess(CCStartBean ccStartBean) {
@@ -1925,12 +1935,22 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
                         if (json == null) {
                             return;
                         }
+                        Tools.log(TAG,"getRoomReward :"+json);
                         try {
                             JSONObject data = new JSONObject(json);
-                            JSONObject jsonObject = data.getJSONObject("data");
-                            JSONObject total_cup = jsonObject.getJSONObject("total_cup");
+                            JSONObject jsonObject = data.optJSONObject("data");
+                            if(jsonObject==null){
+                                Tools.log(TAG,"jsonObject==null");
+                                return;
+                            }
+                            JSONObject total_cup = jsonObject.optJSONObject("total_cup");
+                            if(total_cup==null){
+                                Tools.log(TAG,"total_cup==null");
+                                return;
+                            }
                             Iterator<String> cup_Iterator = total_cup.keys();
                             final ArrayList<CCUser> users = new ArrayList<>();
+                            HashMap<String,CCUser> hashMap = new HashMap<>();
                             while (cup_Iterator.hasNext()) {
                                 // 获得key
                                 String cupKey = cup_Iterator.next();
@@ -1939,12 +1959,31 @@ public class StudentRoomActivity extends CCRoomActivity implements OnDisplayInte
                                 ccUser.setCupIndex(total_cup.getInt(cupKey));
                                 ccUser.setSendCup(true);
                                 users.add(ccUser);
+                                hashMap.put(cupKey,ccUser);
                             }
-                            if (onUserCupCountListener != null) {
-                                onUserCupCountListener.getUserCupCount(users);
-                            }
-                        } catch (JSONException e) {
+                            JSONObject total_hammer = jsonObject.optJSONObject("total_hammer");
+                            if(total_hammer!=null){
+                                Iterator<String> hammer_Iterator = total_hammer.keys();
+                                while (hammer_Iterator.hasNext()) {
+                                    // 获得key
+                                    String hammerKey = hammer_Iterator.next();
+                                    CCUser ccUser = hashMap.get(hammerKey);
+                                    if(ccUser==null){
+                                        ccUser = new CCUser();
+                                        ccUser.setUserId(hammerKey);
+                                        users.add(ccUser);
+                                    }
 
+                                    LogUtil.e("QQ","total_hammer.getInt(hammerKey): "+total_hammer.getInt(hammerKey));
+                                    ccUser.setRewardHammerIndex(total_hammer.getInt(hammerKey));
+                                }
+                            }
+
+                            if(menuTopView!=null){
+                                menuTopView.setUserCupCount(users);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
 

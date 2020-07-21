@@ -103,6 +103,15 @@
         android:layout_centerInParent="true"
         android:visibility="gone"
         android:orientation="vertical"/>
+    <!-- 互动：锤子视图 -->
+    <com.bokecc.room.ui.view.widget.HammerView
+        android:id="@+id/room_hammer_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:orientation="vertical"/>
+
     <!-- 屏幕共享，可以继续优化为按需加载 -->
     <com.bokecc.room.ui.view.video.widget.SuspensionVideoView
         android:id="@+id/student_share_video"

@@ -36,6 +36,7 @@ import com.bokecc.sskt.base.callback.OnRollCallListener;
 import com.bokecc.sskt.base.callback.OnRoomTimerListener;
 import com.bokecc.sskt.base.callback.OnSendCupListener;
 import com.bokecc.sskt.base.callback.OnSendFlowerListener;
+import com.bokecc.sskt.base.callback.OnSendHammerListener;
 import com.bokecc.sskt.base.callback.OnServerListener;
 import com.bokecc.sskt.base.callback.OnStartNamedListener;
 import com.bokecc.sskt.base.callback.OnStreamStatsListener;
@@ -620,6 +621,14 @@ public class InteractSessionManager {
             mEventBus.post(new MyEBEvent(Config.INTERACT_EVENT_WHAT_SEND_FLOWER, sendReward));
         }
     };
+    //发送鲜花事件
+    private OnSendHammerListener mSendHammerListener = new OnSendHammerListener() {
+        @Override
+        public void onSendHammer(SendReward sendReward) {
+            mEventBus.post(new MyEBEvent(Config.INTERACT_EVENT_WHAT_SEND_HAMMER, sendReward));
+        }
+    };
+
     //黑流检测
     private OnStreamStatsListener mOnStreamStatsListener = new OnStreamStatsListener() {
         @Override
@@ -730,6 +739,7 @@ public class InteractSessionManager {
         mInteractSession.setOnBallotListener(mBallotListener);
         mInteractSession.setOnSendCupListener(mSendCupListener);
         mInteractSession.setOnSendFlowerListener(mSendFlowerListener);
+        mInteractSession.setOnSendHammerListener(mSendHammerListener);
         mInteractSession.setOnStreamStatsListener(mOnStreamStatsListener);
         mInteractSession.setOnAtlasServerListener(mAtlasServerDisconnectedListener);
         mInteractSession.setOnPublishStreamErrListener(mOnPublishStreamErrListener);
