@@ -23,8 +23,10 @@ dependencies {
 //    api project(':ssktbaselibrary')//引用基础包
 //    api project(':ccdoclibrary')//引用文档库
     //远程依赖
-    api 'com.bokecc:ClassBaseLib:6.1.13'//引用基础包
+    api 'com.bokecc:ClassBaseLib:6.1.14'//引用基础包
     api 'com.bokecc:docLib:1.0.8'//引用文档库
+
+    api 'com.android.support:recyclerview-v7:28.0.0'
 
     //eventbus
     implementation 'org.greenrobot:eventbus:3.1.1'

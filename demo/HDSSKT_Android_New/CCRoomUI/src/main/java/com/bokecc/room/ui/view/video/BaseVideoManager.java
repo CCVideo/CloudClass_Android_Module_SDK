@@ -12,7 +12,7 @@ import com.bokecc.sskt.base.bean.SubscribeRemoteStream;
 import com.bokecc.sskt.base.callback.CCAtlasCallBack;
 import com.bokecc.sskt.base.common.config.LogConfig;
 import com.bokecc.sskt.base.common.exception.StreamException;
-import com.bokecc.common.base.CCBaseActivity;
+import com.bokecc.room.ui.view.base.CCBaseActivity;
 import com.bokecc.common.utils.Tools;
 import com.bokecc.room.ui.view.video.listener.OnVideoClickListener;
 import com.bokecc.room.ui.model.VideoStreamView;

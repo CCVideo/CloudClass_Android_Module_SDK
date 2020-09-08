@@ -15,7 +15,7 @@ import com.bokecc.room.ui.view.doc.CCDocView;
 import com.bokecc.sskt.base.CCAtlasClient;
 import com.bokecc.sskt.base.bean.SubscribeRemoteStream;
 import com.bokecc.sskt.base.common.exception.StreamException;
-import com.bokecc.common.base.CCBaseActivity;
+import com.bokecc.room.ui.view.base.CCBaseActivity;
 import com.bokecc.common.utils.Tools;
 import com.bokecc.room.ui.R;
 import com.bokecc.room.ui.view.video.manager.MyLinearlayoutManager;

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewStub;
 
-import com.bokecc.common.base.CCBaseActivity;
+import com.bokecc.room.ui.view.base.CCBaseActivity;
 import com.bokecc.room.ui.R;
 import com.bokecc.room.ui.listener.OnDisplayInteractionListener;
 import com.bokecc.room.ui.view.video.manager.MyGridLayoutManager;

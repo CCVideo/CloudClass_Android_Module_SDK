@@ -16,7 +16,6 @@ import android.view.WindowManager;
 
 import com.bokecc.ccdocview.CCDocViewManager;
 import com.bokecc.ccdocview.SPUtil;
-import com.bokecc.common.base.CCBaseActivity;
 import com.bokecc.common.dialog.CustomTextViewDialog;
 import com.bokecc.common.utils.NetWorkStateReceiver;
 import com.bokecc.common.utils.Tools;

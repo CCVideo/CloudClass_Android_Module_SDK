@@ -1,21 +1,15 @@
 package com.bokecc.room.ui.view.base;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bokecc.common.base.CCBaseActivity;
 import com.bokecc.room.ui.R;
 
 
