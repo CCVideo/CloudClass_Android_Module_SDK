@@ -90,8 +90,8 @@ allprojects {
 //项目module的build.gradle
 dependencies {
     //云课堂sdk引用
-    api 'com.bokecc:ClassBaseLib:6.1.3'//基础库
-    api 'com.bokecc:docLib:1.0.1'//文档库 
+    api 'com.bokecc:ClassBaseLib:6.x.x'//基础库
+    api 'com.bokecc:docLib:1.x.x'//文档库 
 }
 ```
 
