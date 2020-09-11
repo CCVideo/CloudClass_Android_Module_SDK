@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DocDemoActivity">
+
+    <RelativeLayout
+        android:id="@+id/id_lecture_doc_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <com.bokecc.ccdocview.DocWebView
+            android:id="@+id/id_lecture_docppt_display"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.bokecc.ccdocview.DocView
+            android:id="@+id/id_lecture_doc_display"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </com.bokecc.ccdocview.DocWebView>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/text_hint"
+        android:layout_below="@+id/id_lecture_doc_area"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="15dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:text="以上为文档区域"/>
+    <Button
+        android:id="@+id/restoreDoc"
+        android:layout_below="@+id/text_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textSize="20dp"
+        android:text="还原"/>
+
+</RelativeLayout>

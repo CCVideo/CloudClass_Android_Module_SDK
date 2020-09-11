@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name" translatable="false">Cloud classroom</string>
+    <string name="popup_cancel_txt" translatable="false">cancel</string>
+    <string name="validate_nickname" translatable="false">Please enter a nickname</string>
+    <string name="validate_password" translatable="false">Please enter your password</string>
+    <string name="validate_room" translatable="false">Entering the room</string>
+    <string name="setting_gag" translatable="false">All banned</string>
+    <string name="setting_close_mic" translatable="false">All Guanmai</string>
+    <string name="setting_low_flow" translatable="false">Low flow mode</string>
+    <string name="setting_mai" translatable="false">Whole wheat</string>
+    <string name="setting_lianmai_mode" translatable="false">Continuous wheat mode</string>
+    <string name="setting_lianmai_free" translatable="false">Free wheat</string>
+    <string name="setting_lianmai_named" translatable="false">Raise your hand</string>
+    <string name="setting_lianmai_auto" translatable="false">Automatic wheat</string>
+    <string name="setting_media_mode" translatable="false">Even the wheat audio video</string>
+    <string name="setting_media_audio" translatable="false">Audio even wheat</string>
+    <string name="setting_media_both" translatable="false">Video</string>
+    <string name="setting_loop_play_time" translatable="false">Carousel frequency</string>
+    <string name="setting_tbitrate" translatable="false">Teacher video resolution</string>
+    <string name="setting_sbitrate" translatable="false">Student video resolution</string>
+    <string name="setting_bitrate" translatable="false">Video resolution</string>
+    <string name="setting_bitrate_720p">720P</string>
+    <string name="setting_bitrate_480p">480P</string>
+    <string name="setting_bitrate_240p">240P</string>
+    <string name="scan_title" translatable="false">Scan QR code</string>
+    <string name="doc_list_tip" translatable="false">Please upload the file to the document area via the web side.</string>
+    <string name="doc_item_del" translatable="false">delete</string>
+    <string name="start_named_tip" translatable="false">Initiate a name</string>
+    <string name="set_time_tip" translatable="false">Set the time allowed to participate in the name</string>
+    <string name="restart_named" translatable="false">Check in again</string>
+    <string name="no_class_tip" translatable="false">Haven’t taken classes yet, take a break.</string>
+    <string name="send_txt" translatable="false">send</string>
+    <string name="lecture_no_doc_tip" translatable="false">No file in the document area</string>
+    <string name="qc_code_close" translatable="false">shut down</string>
+    <string name="qr_code_auto_scan_notification" translatable="false">Put the QR code into the box and you can scan it automatically.</string>
+    <string name="qr_code_notification" translatable="false">prompt</string>
+    <string name="qr_code_camera_not_open" translatable="false">Your camera function does not seem to be open~ Go to \"Settings>Privacy>Camera\"Set it up.</string>
+    <string name="qr_code_positive_button_know" translatable="false">Got it</string>
+    <string name="qr_code_positive_button_confirm" translatable="false">confirm</string>
+    <string name="qr_code_could_not_read_qr_code_from_picture" translatable="false">Did not read the link in the picture, try another picture~</string>
+    <string name="qr_code_could_not_read_qr_code_from_scanner" translatable="false">Sorry, I can not open the scanned content.</string>
+    <string name="qr_code_camera_not_found" translatable="false">Camera not detected</string>
+    <string name="qr_album" translatable="false">Album</string>
+    <string name="direction_class_tip" translatable="false">Please select classroom mode</string>
+    <string name="direction_class_h_tip" translatable="false">Horizontal screen</string>
+    <string name="direction_class_v_tip" translatable="false">Vertical screen</string>
+    <string name="vote_tip" translatable="false">answer sheet</string>
+    <string name="commit_answer" translatable="false">Submit an answer</string>
+    <string name="brain_commit" translatable="false">submit</string>
+    <string name="kick_down_mai_tip" translatable="false">Are you sure you will kick all the students down?</string>
+    <string name="right_answer_tip" translatable="false">correct answer:</string>
+    <string name="self_answer_tip" translatable="false">your answer:</string>
+    <string name="link_url" translatable="false">Please enter a class link</string>
+    <string name="join_class" translatable="false">Enter the classroom</string>
+    <string name="first_step" translatable="false">Cloud Classroom is a real-time interactive online classroom app. You can enter the classroom through the specified link or QR code provided by the teacher for online interactive teaching.</string>
+
+</resources>

@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">云课堂</string>
+
+    <string name="validate_nickname">请输入昵称</string>
+    <string name="validate_password">请输入密码</string>
+    <string name="validate_room">进入房间</string>
+    <string name="join_class">进入课堂</string>
+
+
+    <string name="scan_title">扫描二维码</string>
+
+
+    <!--扫一扫-->
+    <string name="qc_code_close">关闭</string>
+    <string name="qr_code_auto_scan_notification">将二维码放入框内，即可自动扫描</string>
+    <string name="qr_code_notification">提示</string>
+    <string name="qr_code_camera_not_open">您的相机功能好像没有打开哦~去\"设置>隐私>相机\"设置一下吧</string>
+    <string name="qr_code_positive_button_know">知道了</string>
+    <string name="qr_code_positive_button_confirm">确认</string>
+    <string name="qr_code_could_not_read_qr_code_from_picture">没有读出图片中的链接，换张图片试试吧~</string>
+    <string name="qr_code_could_not_read_qr_code_from_scanner">对不起，无法打开扫出的内容</string>
+    <string name="qr_code_camera_not_found">未检测到相机</string>
+    <string name="qr_album">相册</string>
+    <string name="direction_class_tip">请选择课堂模式</string>
+    <string name="direction_class_h_tip">横屏版</string>
+    <string name="direction_class_v_tip">竖屏版</string>
+
+
+    <string name="first_step">云课堂是一款实时互动的在线教室APP，您可以通过老师提供的指定链接或二维码进入教室，进行在线互动教学。</string>
+
+
+    //1SDK接入
+
+    // DO NOT TRANSLATE
+</resources>
