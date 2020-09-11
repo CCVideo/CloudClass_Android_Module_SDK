@@ -12,7 +12,7 @@
 | -------------- | -------------: | :----------------------------------------------------------- |
 | 1 | 	CCDocViewManager | [getInstance()](# 1.getInstance) |
 | 2 | 	void | [addInteractListeners()](# 2.addInteractListeners) |
-| 3 | 	void | [setDocHistory(IDocView docView, IPPTView docWebView)](# 3.setDocHistory) |
+| 3 | 	void | [setDocHistory(DocView docView, DocWebView docWebView)](# 3.setDocHistory) |
 | 4 | 	void | [getRoomDocs( String roomid, final AtlasCallBack<RoomDocs> callBack)](# 4.getRoomDocs) |
 | 5 | 	void |[getRoomDoc( String roomId,  String docId, final AtlasCallBack<DocInfo> callBack) ](# 5.getRoomDoc)|
 | 6 |	void |[ delDoc(String roomId, String docId, final AtlasCallBack<Void> callBack) ](# 6.delDoc)|
@@ -77,7 +77,7 @@ public void addInteractListeners() ；
 ### 3.setDocHistory
 
 ```java
-public void setDocHistory(IDocView docView, IPPTView docWebView);
+public void setDocHistory(DocView docView, DocWebView docWebView);
 
 ```
 
@@ -89,10 +89,10 @@ public void setDocHistory(IDocView docView, IPPTView docWebView);
 
  3.参数
 
-| 参数名     | 类型     | 说明            |
-| ---------- | -------- | --------------- |
-| docView    | IDocView | DocView 画板    |
-| docWebView | IPPTView | DocWebView 文档 |
+| 参数名     | 类型       | 说明            |
+| ---------- | ---------- | --------------- |
+| docView    | DocView    | DocView 画板    |
+| docWebView | DocWebView | DocWebView 文档 |
 
  4.返回
 	无

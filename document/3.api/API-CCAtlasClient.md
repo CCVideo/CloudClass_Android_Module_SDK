@@ -3236,7 +3236,7 @@ public void mediaSwitchAudioUserid(boolean value, String userid, int desRole, CC
 	无
 	
 	
-### 77.mediaSwitchAudioUserid:
+### 77.setOnUserCountUpdateListener:
 
 ```java
 

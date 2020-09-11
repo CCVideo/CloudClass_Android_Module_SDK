@@ -12,6 +12,8 @@
 | -------------- | -------------: | :----------------------------------------------------------- |
 | 1 | void | [setDocBackGroundColor(String defaultBackgroundColor)](# 1.setDocBackGroundColor) |
 | 2 | 	void | [setOnDpCompleteListener(OnDpCompleteListener mOnDpCompleteListening)](# 2.setOnDpCompleteListener) |
+| 3 | void | [setCanScroll(boolean canScroll)](# 3.setCanScroll) |
+| 4 | void | [needEvent(boolean needEvent)](# 4.needEvent) |
 
 
 ## 二、接口介绍
@@ -93,7 +95,53 @@ public interface OnDpCompleteListener {
  5.异常
  	无
 
+### 3.setCanScroll
 
+```java
+public void setCanScroll(boolean canScroll)
+```
+
+ 1.作用
+ 	设置文档是否能否滚动
+
+ 2.注意
+	无
+
+ 3.参数
+
+| 参数名    | 类型    | 说明                             |
+| --------- | ------- | -------------------------------- |
+| canScroll | boolean | 默认背景颜色，默认为白色 #FFFFFF |
+
+ 4.返回
+	无
+
+ 5.异常
+	无
+
+### 4.needEvent
+
+```java
+public void needEvent(boolean needEvent)
+```
+
+ 1.作用
+ 	是否能够接收 touch 事件，针对宽图做的特殊处理，适用于宽度适配长图处理，如果仅采用窗口适配模式可以忽略
+
+ 2.注意
+	无
+
+ 3.参数
+
+| 参数名    | 类型    | 说明 |
+| --------- | ------- | ---- |
+| canScroll | boolean |      |
+
+ 4.返回
+	无
+
+ 5.异常
+	无
 
 
 

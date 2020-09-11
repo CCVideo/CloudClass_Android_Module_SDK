@@ -30,7 +30,7 @@
 | 18 |	int | [getDocWidth()](# 18.getDocWidth) |
 | 19 |	int | [getDocHeight() ](# 19.getDocHeight) |
 | 20 |	void | [recycle() ](# 20.recycle) |
-
+| 21 |	void | [setColor(String color)](# 21.setColor) |
 
 ## 二、接口介绍
 
@@ -245,10 +245,10 @@ public void setStrokeWidth(float width)
 ```
 
  1.作用
- 	设置颜色
+ 	设置颜色， 
 
  2.注意
- 	
+ 	此外还是一个参数设置颜色的方法 ，参考 21 setColor（String color）
 
  3.参数
 
@@ -263,6 +263,7 @@ public void setStrokeWidth(float width)
  5.异常
 	无
 	
+
 ### 10.undo
 
 ```java
@@ -537,7 +538,30 @@ public void recycle()
  5.异常
 	无	
 
+### 21.setColor
 
+```java
+ public void setColor(String color) 
+
+```
+
+ 1.作用
+ 	设置颜色
+
+ 2.注意
+ 	
+
+ 3.参数
+
+| 参数名 | 类型   | 说明                  |
+| ------ | ------ | --------------------- |
+| color  | String | 颜色色值，如"#ff0000" |
+
+ 4.返回
+	无
+
+ 5.异常
+	无
 
 
 

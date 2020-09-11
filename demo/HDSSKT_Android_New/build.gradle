@@ -4,7 +4,7 @@ buildscript {
     repositories {
         // 配置私有仓库地址
         maven {
-            url 'http://nexus.bokecc.com/repository/sdk-group/'
+            url 'http://nexus-app.bokecc.com/repository/sdk-group/'
         }
         google()
         jcenter()
@@ -18,7 +18,7 @@ allprojects {
     repositories {
         // 配置私有仓库地址
         maven {
-            url 'http://nexus.bokecc.com/repository/sdk-group/'
+            url 'http://nexus-app.bokecc.com/repository/sdk-group/'
         }
         google()
         jcenter()
