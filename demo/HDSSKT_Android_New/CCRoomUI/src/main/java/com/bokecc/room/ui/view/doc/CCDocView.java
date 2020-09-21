@@ -649,6 +649,7 @@ public class CCDocView extends RelativeLayout implements View.OnClickListener, R
 //        mDocView.setClickable(!supportGesture);
         bigContainer.setIntercept(!supportGesture);
         if(supportGesture){
+            bigContainer.setCanDraw(false);
             if(mGestureViewBinder==null){
                 mGestureViewBinder = GestureViewBinder.bind(mActivity, bigContainer, mDocWebView);
                 //使用了 WebView 的下上滑动，这里就不需要了
