@@ -20,8 +20,12 @@ android {
 
 dependencies {
     //房间UI模块
-    implementation 'com.bokecc:SaasRoomUILib:1.0.0'
-    implementation 'com.bokecc:RoomUILib:1.0.0'
+//    implementation project(':CCRoomUI')
+    implementation 'com.bokecc:RoomUILib:6.2.9'
+
+//    implementation project(':CCSaasRoomUI')
+    implementation 'com.bokecc:SaasRoomUILib:6.2.9'
+
 
     //引入android资源包
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -46,6 +50,7 @@ dependencies {
     //二维码库
     implementation 'com.google.zxing:core:3.2.1'
 
-    //EventBus
+//    // 给EventBus配置索引，提升效率 使用annotationProcessor 属性将EventBus批注处理器添加到构建中
+//    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
 }

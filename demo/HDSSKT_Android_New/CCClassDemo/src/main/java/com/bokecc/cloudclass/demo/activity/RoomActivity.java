@@ -21,9 +21,6 @@ import permissions.dispatcher.RuntimePermissions;
 
 import static com.bokecc.common.utils.Tools.showToast;
 
-/**
- * 直播间demo
- */
 @RuntimePermissions
 public class RoomActivity extends BaseActivity {
 

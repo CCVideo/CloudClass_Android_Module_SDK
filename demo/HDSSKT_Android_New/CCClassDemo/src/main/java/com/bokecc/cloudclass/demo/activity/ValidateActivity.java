@@ -61,14 +61,14 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
     private String mTemplate;
     private int mLayoutMode;
 
-    private static Intent newIntent(Context context, String roomName, String roomDesc, String roomId, String userId, int role, boolean isNoPwd,String template) {
+    private static Intent newIntent(Context context, String roomName, String roomDesc, String roomId, String userId, int role, boolean isNoPwd, String template) {
         Intent intent = new Intent(context, ValidateActivity.class);
         intent.putExtra(KEY_ROOM_NAME, roomName);
         intent.putExtra(KEY_ROOM_DESC, roomDesc);
         intent.putExtra(KEY_ROOM_ID, roomId);
         intent.putExtra(KEY_USER_ID, userId);
-        if(!TextUtils.isEmpty(template))
-        intent.putExtra(KEY_ROOM_TEMPLATE, template);
+        if (!TextUtils.isEmpty(template))
+            intent.putExtra(KEY_ROOM_TEMPLATE, template);
         intent.putExtra(KEY_ROLE, role);
         intent.putExtra(KEY_STUDENT_LOGIN_NO_PWD, isNoPwd);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -83,7 +83,7 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
         intent.putExtra(KEY_ROOM_ID, roomId);
         intent.putExtra(KEY_USER_ID, userId);
         intent.putExtra(KEY_LAYOUT_MODE, roomDes.getLayoutMode());
-        if(!TextUtils.isEmpty(template))
+        if (!TextUtils.isEmpty(template))
             intent.putExtra(KEY_ROOM_TEMPLATE, template);
         intent.putExtra(KEY_ROLE, role);
         intent.putExtra(KEY_STUDENT_LOGIN_NO_PWD, isNoPwd);
@@ -93,14 +93,17 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
     }
 
     public static void startSelf(Context context, String roomName, String roomDesc, String roomId, String userId, int role, boolean isNoPwd) {
-        context.startActivity(newIntent(context, roomName, roomDesc, roomId, userId, role, isNoPwd,null));
+        context.startActivity(newIntent(context, roomName, roomDesc, roomId, userId, role, isNoPwd, null));
     }
-    public static void startSelf(Context context, String roomName, String roomDesc, String roomId, String userId, int role, boolean isNoPwd,String template) {
-        context.startActivity(newIntent(context, roomName, roomDesc, roomId, userId, role, isNoPwd,template));
+
+    public static void startSelf(Context context, String roomName, String roomDesc, String roomId, String userId, int role, boolean isNoPwd, String template) {
+        context.startActivity(newIntent(context, roomName, roomDesc, roomId, userId, role, isNoPwd, template));
     }
-    public static void startSelf(Context context, RoomDes roomDes, String roomId, String userId, int role, boolean isNoPwd,String template) {
-        context.startActivity(newIntent(context, roomDes, roomId, userId, role, isNoPwd,template));
+
+    public static void startSelf(Context context, RoomDes roomDes, String roomId, String userId, int role, boolean isNoPwd, String template) {
+        context.startActivity(newIntent(context, roomDes, roomId, userId, role, isNoPwd, template));
     }
+
     public static final String TAG = ValidateActivity.class.getSimpleName();
 
     private String mRoomId;
@@ -127,7 +130,8 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onInteractEvent(Boolean event) {}
+    public void onInteractEvent(Boolean event) {
+    }
 
     @Override
     protected int getContentLayoutId() {
@@ -159,11 +163,12 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
                         public void onLeft() {
                             finish();
                         }
+
                         @Override
                         public void onRight() {
                             intent.putExtra("mRoomid", getIntent().getStringExtra(KEY_ROOM_ID));
                             intent.putExtra("mUserid", getIntent().getStringExtra(KEY_USER_ID));
-                            startActivityForResult(intent,Config.CITYSTATUS_RESULT_CODE);
+                            startActivityForResult(intent, Config.CITYSTATUS_RESULT_CODE);
                         }
                     }).build();
             setTitleOptions(options);
@@ -185,11 +190,12 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
                     public void onLeft() {
                         finish();
                     }
+
                     @Override
                     public void onRight() {
                         intent.putExtra("mRoomid", getIntent().getStringExtra(KEY_ROOM_ID));
                         intent.putExtra("mUserid", getIntent().getStringExtra(KEY_USER_ID));
-                        startActivityForResult(intent,Config.CITYSTATUS_RESULT_CODE);
+                        startActivityForResult(intent, Config.CITYSTATUS_RESULT_CODE);
                     }
                 }).build();
         setTitleOptions(options);
@@ -202,7 +208,7 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
         mRoomId = getIntent().getStringExtra(KEY_ROOM_ID);
         mUserId = getIntent().getStringExtra(KEY_USER_ID);
         mRole = getIntent().getIntExtra(KEY_ROLE, mRole);
-        mLayoutMode = getIntent().getIntExtra(KEY_LAYOUT_MODE,0);
+        mLayoutMode = getIntent().getIntExtra(KEY_LAYOUT_MODE, 0);
         mTemplate = getIntent().getStringExtra(KEY_ROOM_TEMPLATE);
         mNickName = mSPUtil.getString(mRoomId + "&" + mUserId + "&" + mRole + "-name");
         holder.mRoomName.setText(Html.fromHtml(roomName));
@@ -292,12 +298,12 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
             Tools.hideSoftInput(ValidateActivity.this);
             mNickName = getEditTextValue(mNickname);
             mPwd = getEditTextValue(mPassword);
-            if (mRole == TALKER && isNoPwd ) {
+            if (mRole == TALKER && isNoPwd) {
                 if (TextUtils.isEmpty(mNickName)) {
                     toastOnUiThread("请填写登录信息");
                     return;
                 }
-            } else if(mRole == INSPECTOR && isNoPwd ){
+            } else if (mRole == INSPECTOR && isNoPwd) {
                 if (TextUtils.isEmpty(mNickName)) {
                     toastOnUiThread("请填写登录信息");
                     return;
@@ -315,7 +321,7 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
                         @Override
                         public void onSuccess(String sessionid) {
                             saveUserMsg();
-                            join(sessionid,mUserId);
+                            join(sessionid, mUserId);
                         }
 
                         @Override
@@ -329,36 +335,36 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
     }
 
     /**
-     *
      * @param mSeesionid
      * @param mUserAccount
      */
-    private void join(String mSeesionid,String mUserAccount) {
+    private void join(String mSeesionid, String mUserAccount) {
         //saas界面的跳转
         dismissLoadingOnUiThread();
-        if (!isJump&&TextUtils.equals(ROOM_TYPE_SAAS,mTemplate)) {
+        if (!isJump && TextUtils.equals(ROOM_TYPE_SAAS, mTemplate)) {
             isJump = true;
             if (mRole == TALKER) {
-                if(mLayoutMode==1){
+                if (mLayoutMode == 1 || mLayoutMode == 2) {
                     Intent intent = new Intent(ValidateActivity.this, StudentRoomSaas1v1Activity.class);
                     intent.putExtra(CCRoomActivity.ScreenDirectionKey, CCClassApplication.sClassDirection);
-                    intent.putExtra(CCRoomActivity.SeesionidKey,mSeesionid);
-                    intent.putExtra(CCRoomActivity.UserAccountKey,mUserAccount);
+                    intent.putExtra(CCRoomActivity.SeesionidKey, mSeesionid);
+                    intent.putExtra(CCRoomActivity.UserAccountKey, mUserAccount);
+                    intent.putExtra(CCRoomActivity.KeyLayoutMode, mLayoutMode);
                     intent.putExtra(CCRoomActivity.AreaCodeKey, CCClassApplication.mAreaCode);
                     startActivity(intent);
-                }else if(mLayoutMode==0){
+                } else if (mLayoutMode == 0) {
                     Intent intent = new Intent(ValidateActivity.this, StudentRoomSaasActivity.class);
 //                Intent intent = new Intent(ValidateActivity.this, StudentDemoActivity.class);
                     intent.putExtra(CCRoomActivity.ScreenDirectionKey, CCClassApplication.sClassDirection);
-                    intent.putExtra(CCRoomActivity.SeesionidKey,mSeesionid);
-                    intent.putExtra(CCRoomActivity.UserAccountKey,mUserAccount);
+                    intent.putExtra(CCRoomActivity.SeesionidKey, mSeesionid);
+                    intent.putExtra(CCRoomActivity.UserAccountKey, mUserAccount);
                     intent.putExtra(CCRoomActivity.AreaCodeKey, CCClassApplication.mAreaCode);
                     startActivity(intent);
-                }else {
+                } else {
                     toastOnUiThread("此版本暂不支持该样式");
                 }
 
-            }else{
+            } else {
                 toastOnUiThread("此版本不支持该角色");
             }
             return;
@@ -367,35 +373,35 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
         //原有界面的跳转处理
         CCAtlasClient.getInstance().join(mSeesionid, mUserAccount, CCClassApplication.mAreaCode, false, new
                 CCAtlasCallBack<CCInteractBean>() {
-            @Override
-            public void onSuccess(CCInteractBean ccInteractBean) {
-                synchronized (ValidateActivity.this) {
-                    if (!isJump) {
-                        isJump = true;
-                        dismissLoadingOnUiThread();
-                        if (mRole == CCAtlasClient.PRESENTER) {
-                            Intent intent = new Intent(ValidateActivity.this, TeacherRoomActivity.class);
-                            intent.putExtra(CCRoomActivity.ScreenDirectionKey, CCClassApplication.sClassDirection);
-                            startActivity(intent);
-                        } else if (mRole == TALKER) {
-                            Intent intent = new Intent(ValidateActivity.this, StudentRoomActivity.class);
-                            intent.putExtra(CCRoomActivity.ScreenDirectionKey, CCClassApplication.sClassDirection);
-                            startActivity(intent);
-                        } else if (mRole == INSPECTOR) {
-                            Intent intent = new Intent(ValidateActivity.this, InspectorRoomActivity.class);
-                            intent.putExtra(CCRoomActivity.ScreenDirectionKey, CCClassApplication.sClassDirection);
-                            startActivity(intent);
+                    @Override
+                    public void onSuccess(CCInteractBean ccInteractBean) {
+                        synchronized (ValidateActivity.this) {
+                            if (!isJump) {
+                                isJump = true;
+                                dismissLoadingOnUiThread();
+                                if (mRole == CCAtlasClient.PRESENTER) {
+                                    Intent intent = new Intent(ValidateActivity.this, TeacherRoomActivity.class);
+                                    intent.putExtra(CCRoomActivity.ScreenDirectionKey, CCClassApplication.sClassDirection);
+                                    startActivity(intent);
+                                } else if (mRole == TALKER) {
+                                    Intent intent = new Intent(ValidateActivity.this, StudentRoomActivity.class);
+                                    intent.putExtra(CCRoomActivity.ScreenDirectionKey, CCClassApplication.sClassDirection);
+                                    startActivity(intent);
+                                } else if (mRole == INSPECTOR) {
+                                    Intent intent = new Intent(ValidateActivity.this, InspectorRoomActivity.class);
+                                    intent.putExtra(CCRoomActivity.ScreenDirectionKey, CCClassApplication.sClassDirection);
+                                    startActivity(intent);
+                                }
+                            }
                         }
                     }
-                }
-            }
 
-            @Override
-            public void onFailure(int errCode, String errMsg) {
-                dismissLoadingOnUiThread();
-                toastOnUiThread(errMsg);
-            }
-        });
+                    @Override
+                    public void onFailure(int errCode, String errMsg) {
+                        dismissLoadingOnUiThread();
+                        toastOnUiThread(errMsg);
+                    }
+                });
     }
 
 }
